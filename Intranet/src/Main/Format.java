@@ -1,13 +1,5 @@
 package Main;
-/**
- */
-public class Format {
-    /**
-     */
-    private string ONLINE;
 
-    /**
-     */
-    private string OFFLINE;
+public enum Format {
+	OFFLINE, ONLINE
 }
-

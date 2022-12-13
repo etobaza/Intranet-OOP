@@ -1,17 +1,5 @@
 package Main;
-/**
- */
-public class Semester {
-    /**
-     */
-    private string SPRING;
 
-    /**
-     */
-    private string FALL;
-
-    /**
-     */
-    private string SUMMER;
+public enum Semester {
+	SPRING, SUMMER, FALL, WINTER
 }
-
