@@ -1,5 +1,6 @@
 package Main;
-import java.util.*;
+
+import java.io.Serializable;
 
 public class User implements Comparable<User>, Serializable, Cloneable {
 	private String firstName;
@@ -122,12 +123,12 @@ public class User implements Comparable<User>, Serializable, Cloneable {
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public int compareTo(User other) {
 		int usernameComparison = username.compareTo(other.username);
 		return usernameComparison;
 	}
-	
+
 	public boolean equals(Object o) {
 		if (o == this)
 			return true;
