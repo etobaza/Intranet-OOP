@@ -1,4 +1,5 @@
 package Main;
 
-class AcademicDegree {
+public enum AcademicDegree {
+	BACHELOR, MASTER, PHD
 }
