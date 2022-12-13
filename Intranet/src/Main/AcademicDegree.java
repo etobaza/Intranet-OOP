@@ -1,0 +1,6 @@
+package Main;
+/**
+ */
+class AcademicDegree {
+}
+
