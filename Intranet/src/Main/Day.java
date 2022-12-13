@@ -1,5 +1,5 @@
 package Main;
 
 public enum Day {
-	MON, TUE, WED, THU, FRI, SUN;
+	MON, TUE, WED, THU, FRI, SUN
 }
