@@ -11,7 +11,6 @@ public class Student extends User implements ViewTranscript {
 	private Date enrollmentDate;
 	private boolean dormNeed;
 	private int year;
-	private OrganizationName organization;
 	private Semester semester;
 	private AcademicDegree academicDegree;
 	private HashMap<Course, Double> marksForCourses;
@@ -19,14 +18,13 @@ public class Student extends User implements ViewTranscript {
 
 	public Student(String firstName, String lastName, String id, String username, String password, Sex sex, int age,
 			String email, double gpa, Faculty faculty, Date enrollmentDate, boolean dormNeed, int year,
-			OrganizationName organization, Semester semester, AcademicDegree academicDegree) {
+			Semester semester, AcademicDegree academicDegree) {
 		super(firstName, lastName, id, username, password, sex, age, email);
 		this.gpa = gpa;
 		this.faculty = faculty;
 		this.enrollmentDate = enrollmentDate;
 		this.dormNeed = dormNeed;
 		this.year = year;
-		this.organization = organization;
 		this.semester = semester;
 		this.academicDegree = academicDegree;
 	}
@@ -48,18 +46,12 @@ public class Student extends User implements ViewTranscript {
 
 	}
 
-	public boolean joinOrganization(OrganizationName organization) {
-		for (OrganizationName org : OrganizationName.values()) {
-			if (org == organization) {
-				this.organization = organization;
-				return true;
-			}
-		}
-		return false;
+	public void joinOrganization(Organization org) {
+		org.addCandidate(this);
 	}
 
-	public void leaveOrganization() {
-		this.organization = OrganizationName.UNASSIGNED;
+	public void leaveOrganization(Organization org) {
+		org.leaveOrganization(this);
 	}
 
 	public void viewTranscript() {
