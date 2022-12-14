@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 public class Manager extends Employee implements ViewInfoStudents, ViewTransript, ViewTeachers, Create {
-
 	private ManagerType type;
-
 	private ArrayList<News> news;
-
 	private Vector<Teacher> teachers;
-
 	private Vector<Student> students;
+
+	public Manager(String firstName, String lastName, String id, String username, String password, Sex sex, int age,
+			String email, double salary) {
+		super(firstName, lastName, id, username, password, sex, age, email, salary);
+		// TODO Auto-generated constructor stub
+	}
 
 	public boolean approveStrudentRegistr() {
 		return false;
@@ -75,5 +77,13 @@ public class Manager extends Employee implements ViewInfoStudents, ViewTransript
 	}
 
 	public void viewTeacher() {
+	}
+
+	public boolean addToDB() {
+
+	}
+
+	public void viewStudents() {
+
 	}
 }

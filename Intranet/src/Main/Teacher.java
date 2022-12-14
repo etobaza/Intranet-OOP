@@ -112,4 +112,12 @@ public class Teacher extends Employee implements ViewInfoStudents, Create {
 		return null;
 	}
 
+	public boolean addToDB() {
+
+	}
+
+	public void viewStudents() {
+
+	}
+
 }

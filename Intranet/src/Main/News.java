@@ -1,5 +1,7 @@
 package Main;
 
+import java.util.Date;
+
 public class News {
 
 	private String title;

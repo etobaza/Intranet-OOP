@@ -2,7 +2,7 @@ package Main;
 
 public class ResearchPaper {
 
-	private string name;
+	private String name;
 
-	private string content;
+	private String content;
 }
