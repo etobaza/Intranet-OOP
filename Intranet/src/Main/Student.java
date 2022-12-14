@@ -90,7 +90,7 @@ public class Student extends User implements ViewTranscript {
 			return false;
 		Student other = (Student) obj;
 		return academicDegree == other.academicDegree && course == other.course
-				&& Objects.equals(dateOfJoin, other.dateOfJoin) && dormNeed == other.dormNeed
+				&& Objects.equals(enrollmentDate, other.enrollmentDate) && dormNeed == other.dormNeed
 				&& faculty == other.faculty && Double.doubleToLongBits(gpa) == Double.doubleToLongBits(other.gpa)
 				&& organisation == other.organisation && semester == other.semester;
 	}
