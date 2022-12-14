@@ -2,7 +2,7 @@ package Main;
 
 import java.util.Vector;
 
-public class Teacher extends Employee implements ViewInfoStudents {
+public class Teacher extends Employee implements ViewInfoStudents, Create {
 
 	private String department;
 	private String course;
