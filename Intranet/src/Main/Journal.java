@@ -27,5 +27,5 @@ public class Journal {
 	public Map<Date, Double> getGrades(Course course) {
 		return gradeJournal.get(course);
 	}
-ss
+
 }
