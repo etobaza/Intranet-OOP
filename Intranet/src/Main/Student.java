@@ -13,8 +13,9 @@ public class Student extends User implements ViewTranscript {
 	private int year;
 	private Semester semester;
 	private AcademicDegree academicDegree;
-	private HashMap<Course, Double> marksForCourses;
 	private Vector<Course> courses;
+	private Transcript transcript;
+	private Journal journal;
 
 	public Student(String firstName, String lastName, String id, String username, String password, Sex sex, int age,
 			String email, double gpa, Faculty faculty, Date enrollmentDate, boolean dormNeed, int year,
@@ -27,6 +28,8 @@ public class Student extends User implements ViewTranscript {
 		this.year = year;
 		this.semester = semester;
 		this.academicDegree = academicDegree;
+		this.transcript = new Transcript(this);
+		this.journal = new Journal(courses);
 	}
 
 	public String viewStudentInfo() {
@@ -54,53 +57,31 @@ public class Student extends User implements ViewTranscript {
 		org.leaveOrganization(this);
 	}
 
-	public void viewTranscript() {
-	}
-
-	public void getTranscript() {
-	}
-
-	public HashMap<Course, Double> getMarksForCourses() {
-		return marksForCourses;
-	}
-
-	public void setMarksForCourses(String courseName, double value) {
-		for (Course course : courses) {
-			if (course.getName().equals(courseName)) {
-				double existingValue = marksForCourses.get(course);
-				double updatedValue = existingValue + value;
-				marksForCourses.put(course, updatedValue);
-				return;
-			}
-		}
-	}
-
 	public Vector<Course> getCourses() {
 		return courses;
 	}
 
 	public void addCourse(Course course) {
 		courses.add(course);
+		transcript.addGradeTranscript(course, 0);
 	}
 
 	public void dropCourse(Course course) {
 		if (courses.contains(course)) {
 			courses.remove(course);
-			marksForCourses.remove(course);
+			transcript.remove(course);
 		}
 	}
 
 	public String toString() {
 		return "Student [gpa=" + gpa + ", faculty=" + faculty + ", dateOfJoin=" + enrollmentDate + ", dormNeed="
-				+ dormNeed + ", course=" + year + ", organisation=" + organization + ", semester=" + semester
-				+ ", academicDegree=" + academicDegree + "]";
+				+ dormNeed + ", course=" + year + ", semester=" + semester + ", academicDegree=" + academicDegree + "]";
 	}
 
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result
-				+ Objects.hash(academicDegree, year, enrollmentDate, dormNeed, faculty, gpa, organization, semester);
+		result = prime * result + Objects.hash(academicDegree, year, enrollmentDate, dormNeed, faculty, gpa, semester);
 		return result;
 	}
 
@@ -115,6 +96,18 @@ public class Student extends User implements ViewTranscript {
 		return academicDegree == other.academicDegree && year == other.year
 				&& Objects.equals(enrollmentDate, other.enrollmentDate) && dormNeed == other.dormNeed
 				&& faculty == other.faculty && Double.doubleToLongBits(gpa) == Double.doubleToLongBits(other.gpa)
-				&& organization == other.organization && semester == other.semester;
+				&& semester == other.semester;
+	}
+
+	public void viewTranscript() {
+
+	}
+
+	public HashMap<Course, Double> getTranscript() {
+		return transcript.getTranscript();
+	}
+
+	public Journal getJournal() {
+		return journal;
 	}
 }

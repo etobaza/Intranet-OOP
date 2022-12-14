@@ -1,35 +1,24 @@
 package Main;
-import java.lang.*;
 
-/**
- */
+import java.util.HashMap;
+
 public class Transcript {
-    /**
-     */
-    private String firstName;
+	private Student student;
+	private HashMap<Course, Double> transcript;
 
-    /**
-     */
-    private String lastName;
+	public Transcript(Student student) {
+		this.student = student;
+	}
 
-    /**
-     */
-    private vector<Course> courses;
+	public void viewTranscript() {
+		
+	}
 
-    /**
-     */
-    private vector<Mark> marks;
+	public HashMap<Course, Double> getTranscript() {
+		return getTranscript();
+	}
 
-    /**
-     */
-    public void viewTranscript() {
-    }
+	public void addGradeTranscript(Course course, double value) {
 
-    /**
-     * @return 
-     */
-    public String getTranscript() {
-        return null;
-    }
+	}
 }
-
