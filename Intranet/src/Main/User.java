@@ -1,6 +1,8 @@
 package Main;
 
 import java.io.Serializable;
+import java.util.Base64;
+import java.util.Objects;
 
 public class User implements Comparable<User>, Serializable, Cloneable {
 	private String firstName;
@@ -12,6 +14,7 @@ public class User implements Comparable<User>, Serializable, Cloneable {
 	private int age;
 	private String email;
 	private boolean loginStatus;
+	private String encodedPassword;
 
 	public User(String firstName, String lastName, String id, String username, String password, Sex sex, int age,
 			String email) {
@@ -24,15 +27,16 @@ public class User implements Comparable<User>, Serializable, Cloneable {
 		this.age = age;
 		this.email = email;
 		this.loginStatus = false;
+		this.encodedPassword = Base64.getEncoder().encodeToString(this.password.getBytes());
 	}
 
 	public boolean setPassword(String newPassword) {
-		this.password = newPassword;
+		this.hashedPassword = (newPassword);
 		return true;
 	}
 
 	public boolean login(String username, String password) {
-		if (username.equals(this.username) && password.equals(this.password)) {
+		if (username.equals(this.username) && hash(password).equals(this.hashedPassword)) {
 			loginStatus = true;
 			return true;
 		}
@@ -129,15 +133,21 @@ public class User implements Comparable<User>, Serializable, Cloneable {
 		return usernameComparison;
 	}
 
-	public boolean equals(Object o) {
-		if (o == this)
+	public int hashCode() {
+		return Objects.hash(age, email, firstName, id, lastName, loginStatus, password, sex, username);
+	}
+
+	public boolean equals(Object obj) {
+		if (this == obj)
 			return true;
-		if (!(o instanceof User))
+		if (obj == null)
 			return false;
-		User user = (User) o;
-		return username.equals(user.username) && password.equals(user.password) && firstName.equals(user.firstName)
-				&& lastName.equals(user.lastName) && id.equals(user.id) && sex.equals(user.sex) && age == user.age
-				&& email.equals(user.email);
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return age == other.age && Objects.equals(email, other.email) && Objects.equals(firstName, other.firstName)
+				&& Objects.equals(id, other.id) && Objects.equals(lastName, other.lastName)
+				&& loginStatus == other.loginStatus && sex == other.sex && Objects.equals(username, other.username);
 	}
 
 }
