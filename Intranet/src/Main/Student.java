@@ -43,14 +43,6 @@ public class Student extends User implements ViewTranscript {
 	public void viewAttendance() {
 	}
 
-	public boolean addCourse() {
-		return false;
-	}
-
-	public boolean dropCourse() {
-		return false;
-	}
-
 	public void confirmAttendance() {
 	}
 
@@ -97,6 +89,7 @@ public class Student extends User implements ViewTranscript {
 	public void dropCourse(Course course) {
 		if (courses.contains(course)) {
 			courses.remove(course);
+			marksForCourses.remove(course);
 		}
 	}
 
