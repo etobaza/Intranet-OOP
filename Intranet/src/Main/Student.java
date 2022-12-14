@@ -1,7 +1,9 @@
 package Main;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Objects;
+import java.util.Vector;
 
 public class Student extends User implements ViewTranscript {
 	private double gpa;
@@ -12,6 +14,8 @@ public class Student extends User implements ViewTranscript {
 	private OrganizationName organisation;
 	private Semester semester;
 	private AcademicDegree academicDegree;
+	private HashMap<Course, Double> marksForCourses;
+	private Vector<Course> courses;
 
 	public Student(String firstName, String lastName, String id, String username, String password, Sex sex, int age,
 			String email, double gpa, Faculty faculty, Date enrollmentDate, boolean dormNeed, int year,
@@ -65,6 +69,35 @@ public class Student extends User implements ViewTranscript {
 	}
 
 	public void getTranscript() {
+	}
+
+	public HashMap<Course, Double> getMarksForCourses() {
+		return marksForCourses;
+	}
+
+	public void setMarksForCourses(String courseName, double value) {
+		for (Course course : courses) {
+			if (course.getName().equals(courseName)) {
+				double existingValue = marksForCourses.get(course);
+				double updatedValue = existingValue + value;
+				marksForCourses.put(course, updatedValue);
+				return;
+			}
+		}
+	}
+
+	public Vector<Course> getCourses() {
+		return courses;
+	}
+
+	public void addCourse(Course course) {
+		courses.add(course);
+	}
+
+	public void dropCourse(Course course) {
+		if (courses.contains(course)) {
+			courses.remove(course);
+		}
 	}
 
 	public String toString() {
