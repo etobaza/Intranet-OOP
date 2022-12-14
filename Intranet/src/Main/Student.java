@@ -8,20 +8,20 @@ public class Student extends User implements ViewTranscript {
 	private Faculty faculty;
 	private Date enrollmentDate;
 	private boolean dormNeed;
-	private int course;
+	private int year;
 	private OrganizationName organisation;
 	private Semester semester;
 	private AcademicDegree academicDegree;
 
 	public Student(String firstName, String lastName, String id, String username, String password, Sex sex, int age,
-			String email, double gpa, Faculty faculty, Date enrollmentDate, boolean dormNeed, int course,
+			String email, double gpa, Faculty faculty, Date enrollmentDate, boolean dormNeed, int year,
 			OrganizationName organisation, Semester semester, AcademicDegree academicDegree) {
 		super(firstName, lastName, id, username, password, sex, age, email);
 		this.gpa = gpa;
 		this.faculty = faculty;
 		this.enrollmentDate = enrollmentDate;
 		this.dormNeed = dormNeed;
-		this.course = course;
+		this.year = year;
 		this.organisation = organisation;
 		this.semester = semester;
 		this.academicDegree = academicDegree;
@@ -69,7 +69,7 @@ public class Student extends User implements ViewTranscript {
 
 	public String toString() {
 		return "Student [gpa=" + gpa + ", faculty=" + faculty + ", dateOfJoin=" + enrollmentDate + ", dormNeed="
-				+ dormNeed + ", course=" + course + ", organisation=" + organisation + ", semester=" + semester
+				+ dormNeed + ", course=" + year + ", organisation=" + organisation + ", semester=" + semester
 				+ ", academicDegree=" + academicDegree + "]";
 	}
 
@@ -77,7 +77,7 @@ public class Student extends User implements ViewTranscript {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result
-				+ Objects.hash(academicDegree, course, enrollmentDate, dormNeed, faculty, gpa, organisation, semester);
+				+ Objects.hash(academicDegree, year, enrollmentDate, dormNeed, faculty, gpa, organisation, semester);
 		return result;
 	}
 
@@ -89,7 +89,7 @@ public class Student extends User implements ViewTranscript {
 		if (getClass() != obj.getClass())
 			return false;
 		Student other = (Student) obj;
-		return academicDegree == other.academicDegree && course == other.course
+		return academicDegree == other.academicDegree && year == other.year
 				&& Objects.equals(enrollmentDate, other.enrollmentDate) && dormNeed == other.dormNeed
 				&& faculty == other.faculty && Double.doubleToLongBits(gpa) == Double.doubleToLongBits(other.gpa)
 				&& organisation == other.organisation && semester == other.semester;
