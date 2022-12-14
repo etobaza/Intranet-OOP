@@ -2,7 +2,10 @@ package Main;
 
 import java.io.Serializable;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
+import java.util.Vector;
 
 public class User implements Comparable<User>, Serializable {
 	private String firstName;
@@ -14,6 +17,8 @@ public class User implements Comparable<User>, Serializable {
 	private String email;
 	private boolean loginStatus;
 	private String encodedPassword;
+	private HashMap<Course, Double> marksForCourses;
+	private Vector<Course> courses;
 
 	public User(String firstName, String lastName, String id, String username, String password, Sex sex, int age,
 			String email) {
@@ -105,6 +110,35 @@ public class User implements Comparable<User>, Serializable {
 
 	public boolean isLoginStatus() {
 		return loginStatus;
+	}
+
+	public HashMap<Course, Double> getMarksForCourses() {
+		return marksForCourses;
+	}
+
+	public void setMarksForCourses(String courseName, double value) {
+		for (Course course : courses) {
+			if (course.getName().equals(courseName)) {
+				double existingValue = marksForCourses.get(course);
+				double updatedValue = existingValue + value;
+				marksForCourses.put(course, updatedValue);
+				return;
+			}
+		}
+	}
+
+	public Vector<Course> getCourses() {
+		return courses;
+	}
+
+	public void addCourse(Course course) {
+		courses.add(course);
+	}
+
+	public void dropCourse(Course course) {
+		if (courses.contains(course)) {
+			courses.remove(course);
+		}
 	}
 
 	public int compareTo(User other) {
