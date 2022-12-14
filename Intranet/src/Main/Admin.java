@@ -1,7 +1,7 @@
 package Main;
 /**
  */
-public class Admin extends Employee {
+public class Admin extends Employee implements Create {
     /**
      */
     public void viewLogs() {

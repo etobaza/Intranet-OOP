@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Vector;
 
-public class Student extends User implements ViewTranscript {
+public class Student extends User implements ViewTranscript, Create {
 	private double gpa;
 	private Faculty faculty;
 	private Date enrollmentDate;
@@ -110,4 +110,8 @@ public class Student extends User implements ViewTranscript {
 	public Journal getJournal() {
 		return journal;
 	}
+	
+	public void addToDB() {
+	      System.out.println("User was added.");
+	   }
 }

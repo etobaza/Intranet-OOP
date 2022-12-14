@@ -3,7 +3,7 @@ import java.lang.*;
 
 /**
  */
-public class Manager extends Employee implements ViewInfoStudents, ViewTransript, ViewTeachers {
+public class Manager extends Employee implements ViewInfoStudents, ViewTransript, ViewTeachers, Create {
     /**
      */
     private ManagerType type;
