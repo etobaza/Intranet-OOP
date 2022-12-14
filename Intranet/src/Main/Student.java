@@ -31,13 +31,11 @@ public class Student extends User implements ViewTranscript {
 		this.academicDegree = academicDegree;
 	}
 
-	public void viewCourses() {
-	}
-
-	public void viewStudentInfo() {
-	}
-
-	public void viewMarks() {
+	public String viewStudentInfo() {
+		return String.format(
+				"First name: %s\nLast name: %s\nID: %s\nUsername: %s\nSex: %s\nAge: %d\nEmail: %s\nFaculty: %s\nEnrollment date: %s\nYear: %d\nSemester: %s\nAcademic degree: %s",
+				this.getFirstName(), this.getLastName(), this.getId(), this.getUsername(), this.getSex(), this.getAge(),
+				this.getEmail(), this.faculty, this.enrollmentDate, this.year, this.semester, this.academicDegree);
 	}
 
 	public void viewAttendance() {
@@ -47,6 +45,7 @@ public class Student extends User implements ViewTranscript {
 	}
 
 	public void viewOrganization() {
+
 	}
 
 	public boolean joinOrganization(OrganizationName organization) {
