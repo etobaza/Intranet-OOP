@@ -4,12 +4,11 @@ import java.io.Serializable;
 import java.util.Base64;
 import java.util.Objects;
 
-public class User implements Comparable<User>, Serializable, Cloneable {
+public class User implements Comparable<User>, Serializable {
 	private String firstName;
 	private String lastName;
 	private String id;
 	private String username;
-	private String password;
 	private Sex sex;
 	private int age;
 	private String email;
@@ -22,21 +21,21 @@ public class User implements Comparable<User>, Serializable, Cloneable {
 		this.lastName = lastName;
 		this.id = id;
 		this.username = username;
-		this.password = password;
 		this.sex = sex;
 		this.age = age;
 		this.email = email;
 		this.loginStatus = false;
-		this.encodedPassword = Base64.getEncoder().encodeToString(this.password.getBytes());
+		this.encodedPassword = Base64.getEncoder().encodeToString(password.getBytes());
 	}
 
 	public boolean setPassword(String newPassword) {
-		this.hashedPassword = (newPassword);
+		this.encodedPassword = Base64.getEncoder().encodeToString(newPassword.getBytes());
 		return true;
 	}
 
 	public boolean login(String username, String password) {
-		if (username.equals(this.username) && hash(password).equals(this.hashedPassword)) {
+		if (username.equals(this.username)
+				&& Base64.getEncoder().encodeToString(password.getBytes()).equals(this.encodedPassword)) {
 			loginStatus = true;
 			return true;
 		}
@@ -88,24 +87,12 @@ public class User implements Comparable<User>, Serializable, Cloneable {
 		return username;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
 	public Sex getSex() {
 		return sex;
 	}
 
-	public void setSex(Sex sex) {
-		this.sex = sex;
-	}
-
 	public int getAge() {
 		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
 	}
 
 	public String getEmail() {
@@ -116,16 +103,8 @@ public class User implements Comparable<User>, Serializable, Cloneable {
 		this.email = email;
 	}
 
-	public boolean isLoginStatus() {
+	public boolean getLoginStatus() {
 		return loginStatus;
-	}
-
-	public void setLoginStatus(boolean loginStatus) {
-		this.loginStatus = loginStatus;
-	}
-
-	public String getPassword() {
-		return password;
 	}
 
 	public int compareTo(User other) {
@@ -134,7 +113,7 @@ public class User implements Comparable<User>, Serializable, Cloneable {
 	}
 
 	public int hashCode() {
-		return Objects.hash(age, email, firstName, id, lastName, loginStatus, password, sex, username);
+		return Objects.hash(age, email, firstName, id, lastName, loginStatus, encodedPassword, sex, username);
 	}
 
 	public boolean equals(Object obj) {
