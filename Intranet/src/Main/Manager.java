@@ -12,7 +12,6 @@ public class Manager extends Employee implements ViewInfoStudents, ViewTransript
 	public Manager(String firstName, String lastName, String id, String username, String password, Sex sex, int age,
 			String email, double salary) {
 		super(firstName, lastName, id, username, password, sex, age, email, salary);
-		// TODO Auto-generated constructor stub
 	}
 
 	public boolean approveStrudentRegistr() {
