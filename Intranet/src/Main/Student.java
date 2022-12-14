@@ -11,7 +11,7 @@ public class Student extends User implements ViewTranscript {
 	private Date enrollmentDate;
 	private boolean dormNeed;
 	private int year;
-	private OrganizationName organisation;
+	private OrganizationName organization;
 	private Semester semester;
 	private AcademicDegree academicDegree;
 	private HashMap<Course, Double> marksForCourses;
@@ -19,14 +19,14 @@ public class Student extends User implements ViewTranscript {
 
 	public Student(String firstName, String lastName, String id, String username, String password, Sex sex, int age,
 			String email, double gpa, Faculty faculty, Date enrollmentDate, boolean dormNeed, int year,
-			OrganizationName organisation, Semester semester, AcademicDegree academicDegree) {
+			OrganizationName organization, Semester semester, AcademicDegree academicDegree) {
 		super(firstName, lastName, id, username, password, sex, age, email);
 		this.gpa = gpa;
 		this.faculty = faculty;
 		this.enrollmentDate = enrollmentDate;
 		this.dormNeed = dormNeed;
 		this.year = year;
-		this.organisation = organisation;
+		this.organization = organization;
 		this.semester = semester;
 		this.academicDegree = academicDegree;
 	}
@@ -49,12 +49,18 @@ public class Student extends User implements ViewTranscript {
 	public void viewOrganization() {
 	}
 
-	public boolean joinOrganization() {
+	public boolean joinOrganization(OrganizationName organization) {
+		for (OrganizationName org : OrganizationName.values()) {
+			if (org == organization) {
+				this.organization = organization;
+				return true;
+			}
+		}
 		return false;
 	}
 
-	public boolean leaveOrganization() {
-		return false;
+	public void leaveOrganization() {
+		this.organization = OrganizationName.UNASSIGNED;
 	}
 
 	public void viewTranscript() {
@@ -95,7 +101,7 @@ public class Student extends User implements ViewTranscript {
 
 	public String toString() {
 		return "Student [gpa=" + gpa + ", faculty=" + faculty + ", dateOfJoin=" + enrollmentDate + ", dormNeed="
-				+ dormNeed + ", course=" + year + ", organisation=" + organisation + ", semester=" + semester
+				+ dormNeed + ", course=" + year + ", organisation=" + organization + ", semester=" + semester
 				+ ", academicDegree=" + academicDegree + "]";
 	}
 
@@ -103,7 +109,7 @@ public class Student extends User implements ViewTranscript {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result
-				+ Objects.hash(academicDegree, year, enrollmentDate, dormNeed, faculty, gpa, organisation, semester);
+				+ Objects.hash(academicDegree, year, enrollmentDate, dormNeed, faculty, gpa, organization, semester);
 		return result;
 	}
 
@@ -118,6 +124,6 @@ public class Student extends User implements ViewTranscript {
 		return academicDegree == other.academicDegree && year == other.year
 				&& Objects.equals(enrollmentDate, other.enrollmentDate) && dormNeed == other.dormNeed
 				&& faculty == other.faculty && Double.doubleToLongBits(gpa) == Double.doubleToLongBits(other.gpa)
-				&& organisation == other.organisation && semester == other.semester;
+				&& organization == other.organization && semester == other.semester;
 	}
 }

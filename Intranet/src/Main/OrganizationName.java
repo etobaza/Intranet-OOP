@@ -1,5 +1,5 @@
 package Main;
 
 public enum OrganizationName {
-	OSIT, FACES, ARTHOUSE
+	OSIT, FACES, ARTHOUSE, UNASSIGNED
 }
