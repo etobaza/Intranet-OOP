@@ -110,8 +110,8 @@ public class Student extends User implements ViewTranscript, Create {
 	public Journal getJournal() {
 		return journal;
 	}
-	
+
 	public void addToDB() {
-	      System.out.println("User was added.");
-	   }
+		System.out.println("User was added.");
+	}
 }
