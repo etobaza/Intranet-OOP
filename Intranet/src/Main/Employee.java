@@ -1,22 +1,13 @@
 package Main;
-/**
- */
+
 public class Employee extends User {
-    /**
-     */
-    private double salary;
 
-    /**
-     * @param Message 
-     */
-    public void sendMessage(int Message) {
-    }
+	private double salary;
 
-    /**
-     * @return 
-     */
-    public Message getMessage() {
-        return null;
-    }
+	public void sendMessage(int Message) {
+	}
+
+	public Message getMessage() {
+		return null;
+	}
 }
-

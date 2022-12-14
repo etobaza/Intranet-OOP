@@ -7,8 +7,10 @@ import java.util.Vector;
 
 public class Journal {
 	Map<Course, Map<Date, Double>> gradeJournal;
+	Vector<Course> userCourses;
 
 	public Journal(Vector<Course> courses) {
+		this.userCourses = courses;
 		gradeJournal = new TreeMap<>();
 		for (Course course : courses) {
 			gradeJournal.put(course, new TreeMap<>());
@@ -16,12 +18,16 @@ public class Journal {
 	}
 
 	public void addGrade(Course course, double grade) {
-		Map<Date, Double> grades = gradeJournal.get(course);
-		if (grades == null) {
-			grades = new TreeMap<>();
-			gradeJournal.put(course, grades);
+		if (userCourses.contains(course)) {
+
+			Map<Date, Double> grades = gradeJournal.get(course);
+			if (grades == null) {
+				grades = new TreeMap<>();
+				gradeJournal.put(course, grades);
+			}
+
+			grades.put(new Date(), grade);
 		}
-		grades.put(new Date(System.currentTimeMillis()), grade);
 	}
 
 	public Map<Date, Double> getGrades(Course course) {
