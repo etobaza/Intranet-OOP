@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Vector;
 
-/**
- */
 public class Course {
 	private String name;
 	private int credits;
@@ -36,6 +34,10 @@ public class Course {
 			return true;
 		}
 		return false;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public boolean removeStudent(Vector<Student> student2) {

@@ -1,41 +1,23 @@
 package Main;
-/**
- */
+
 public class Admin extends Employee implements Create {
-    /**
-     */
-    public void viewLogs() {
-    }
 
-    /**
-     * @param User 
-     * @return 
-     */
-    public boolean addUser(int User) {
-        return false;
-    }
+	public void viewLogs() {
+	}
 
-    /**
-     * @param User 
-     * @return 
-     */
-    public boolean updateUser(int User) {
-        return false;
-    }
+	public boolean addUser(int User) {
+		return false;
+	}
 
-    /**
-     * @param User 
-     * @return 
-     */
-    public boolean removeUser(int User) {
-        return false;
-    }
+	public boolean updateUser(int User) {
+		return false;
+	}
 
-    /**
-     * @return 
-     */
-    public boolean sendMessage() {
-        return false;
-    }
+	public boolean removeUser(int User) {
+		return false;
+	}
+
+	public boolean sendMessage() {
+		return false;
+	}
 }
-

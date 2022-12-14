@@ -1,13 +1,8 @@
 package Main;
-/**
- */
+
 public class ResearchPaper {
-    /**
-     */
-    private string name;
 
-    /**
-     */
-    private string content;
+	private string name;
+
+	private string content;
 }
-

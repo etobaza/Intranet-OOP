@@ -1,13 +1,8 @@
 package Main;
-/**
- */
+
 public class Time {
-    /**
-     */
-    private int endTime;
 
-    /**
-     */
-    private int startTime;
+	private int endTime;
+
+	private int startTime;
 }
-

@@ -1,137 +1,79 @@
 package Main;
-import java.lang.*;
 
-/**
- */
+import java.util.ArrayList;
+import java.util.Vector;
+
 public class Manager extends Employee implements ViewInfoStudents, ViewTransript, ViewTeachers, Create {
-    /**
-     */
-    private ManagerType type;
 
-    /**
-     */
-    private ArrayList<News> news;
+	private ManagerType type;
 
-    /**
-     */
-    private Vector<Teacher> teachers;
+	private ArrayList<News> news;
 
-    /**
-     */
-    private Vector<Strudent> students;
+	private Vector<Teacher> teachers;
 
-    /**
-     * @return 
-     */
-    public boolean approveStrudentRegistr() {
-        return false;
-    }
+	private Vector<Student> students;
 
-    /**
-     * @return 
-     */
-    public boolean assignCoursesTeacher() {
-        return false;
-    }
+	public boolean approveStrudentRegistr() {
+		return false;
+	}
 
-    /**
-     * @return 
-     */
-    public boolean addCoursesForRegistr() {
-        return false;
-    }
+	public boolean assignCoursesTeacher() {
+		return false;
+	}
 
-    /**
-     */
-    public void viewStrudentInfo() {
-    }
+	public boolean addCoursesForRegistr() {
+		return false;
+	}
 
-    /**
-     */
-    public void manageNews() {
-    }
+	public void viewStrudentInfo() {
+	}
 
-    /**
-     * @param news 
-     * @return 
-     */
-    public boolean addNews(News news) {
-        return false;
-    }
+	public void manageNews() {
+	}
 
-    /**
-     * @param news 
-     * @return 
-     */
-    public boolean removeNews(News news) {
-        return false;
-    }
+	public boolean addNews(News news) {
+		return false;
+	}
 
-    /**
-     * @param news 
-     * @return 
-     */
-    public boolean updateNews(News news) {
-        return false;
-    }
+	public boolean removeNews(News news) {
+		return false;
+	}
 
-    /**
-     * @return 
-     */
-    public String generateReport() {
-        return null;
-    }
+	public boolean updateNews(News news) {
+		return false;
+	}
 
-    /**
-     */
-    public void assignTeacher() {
-    }
+	public String generateReport() {
+		return null;
+	}
 
-    /**
-     * @return 
-     */
-    public boolean addOrganisation() {
-        return false;
-    }
+	public void assignTeacher() {
+	}
 
-    /**
-     * @return 
-     */
-    public boolean updateOrganisation() {
-        return false;
-    }
+	public boolean addOrganisation() {
+		return false;
+	}
 
-    /**
-     * @return 
-     */
-    public boolean removeOrganisation() {
-        return false;
-    }
+	public boolean updateOrganisation() {
+		return false;
+	}
 
-    /**
-     * @return 
-     */
-    public boolean assignOrgLeader() {
-        return false;
-    }
+	public boolean removeOrganisation() {
+		return false;
+	}
 
-    /**
-     * @return 
-     */
-    public boolean removerOrgLeader() {
-        return false;
-    }
+	public boolean assignOrgLeader() {
+		return false;
+	}
 
-    /**
-     * @return 
-     */
-    public boolean sendMessage() {
-        return false;
-    }
+	public boolean removerOrgLeader() {
+		return false;
+	}
 
-    /**
-     */
-    public void viewTeacher() {
-    }
+	public boolean sendMessage() {
+		return false;
+	}
+
+	public void viewTeacher() {
+	}
 }
-

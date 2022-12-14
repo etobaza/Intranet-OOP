@@ -28,8 +28,8 @@ public class Student extends User implements ViewTranscript, Create {
 		this.year = year;
 		this.semester = semester;
 		this.academicDegree = academicDegree;
-		this.transcript = new Transcript(this);
 		this.journal = new Journal(courses);
+		this.transcript = new Transcript(this, journal);
 	}
 
 	public String viewStudentInfo() {
@@ -63,13 +63,15 @@ public class Student extends User implements ViewTranscript, Create {
 
 	public void addCourse(Course course) {
 		courses.add(course);
-		transcript.addGradeTranscript(course, 0);
+		journal = new Journal(courses);
+		transcript = new Transcript(this, journal);
 	}
 
 	public void dropCourse(Course course) {
 		if (courses.contains(course)) {
 			courses.remove(course);
-			transcript.remove(course);
+			journal = new Journal(courses);
+			transcript = new Transcript(this, journal);
 		}
 	}
 
@@ -99,19 +101,19 @@ public class Student extends User implements ViewTranscript, Create {
 				&& semester == other.semester;
 	}
 
-	public void viewTranscript() {
-
-	}
-
-	public HashMap<Course, Double> getTranscript() {
-		return transcript.getTranscript();
+	public String viewTranscript() {
+		return transcript.viewTranscript();
 	}
 
 	public Journal getJournal() {
 		return journal;
 	}
 
-	public void addToDB() {
-		System.out.println("User was added.");
+	public Transcript getTranscript() {
+		return transcript;
+	}
+
+	public boolean addToDB() {
+		return true;
 	}
 }

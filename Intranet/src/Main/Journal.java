@@ -19,13 +19,7 @@ public class Journal {
 
 	public void addGrade(Course course, double grade) {
 		if (userCourses.contains(course)) {
-
 			Map<Date, Double> grades = gradeJournal.get(course);
-			if (grades == null) {
-				grades = new TreeMap<>();
-				gradeJournal.put(course, grades);
-			}
-
 			grades.put(new Date(), grade);
 		}
 	}

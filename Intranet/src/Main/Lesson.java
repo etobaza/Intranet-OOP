@@ -1,29 +1,16 @@
 package Main;
-/**
- */
+
 public class Lesson {
-    /**
-     */
-    private Course course;
 
-    /**
-     */
-    private Day days;
+	private Course course;
 
-    /**
-     */
-    private Format format;
+	private Day days;
 
-    /**
-     */
-    private LessonType lessonType;
+	private Format format;
 
-    /**
-     */
-    private Time time;
+	private LessonType lessonType;
 
-    /**
-     */
-    private int room;
+	private Time time;
+
+	private int room;
 }
-

@@ -1,28 +1,17 @@
 package Main;
-/**
- */
+
 public class DeskWorker extends Employee {
-    /**
-     */
-    private State workingState;
 
-    /**
-     * @return 
-     */
-    public boolean supportWorker() {
-        return false;
-    }
+	private State workingState;
 
-    /**
-     */
-    public void sendReport() {
-    }
+	public boolean supportWorker() {
+		return false;
+	}
 
-    /**
-     * @return 
-     */
-    public boolean reviewCase() {
-        return false;
-    }
+	public void sendReport() {
+	}
+
+	public boolean reviewCase() {
+		return false;
+	}
 }
-

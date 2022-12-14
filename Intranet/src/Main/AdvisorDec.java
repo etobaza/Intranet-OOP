@@ -1,19 +1,14 @@
 package Main;
-/**
- */
-public class AdvisorDec implements ViewTransript, Advisor {
-    /**
-     */
-    private vector<Student> student;
 
-    /**
-     */
-    public void viewTranscript() {
-    }
+import java.util.Vector;
 
-    /**
-     */
-    public void getTranscript() {
-    }
+public class AdvisorDec implements ViewTranscript, Advisor {
+
+	private Vector<Student> student;
+
+	public void viewTranscript() {
+	}
+
+	public void getTranscript() {
+	}
 }
-

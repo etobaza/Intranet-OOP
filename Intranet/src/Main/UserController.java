@@ -46,6 +46,6 @@ public class UserController implements Serializable {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		return new User("", "", "", "", "", "", 0, "");
+		return new User("", "", "", "", "", Sex.UNDEFINED, 0, "");
 	}
 }

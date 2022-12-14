@@ -1,59 +1,31 @@
 package Main;
-import java.lang.*;
-import java.util.*;
 
-/**
- */
 public class News {
-    /**
-     */
-    private String title;
 
-    /**
-     */
-    private String text;
+	private String title;
 
-    /**
-     */
-    private Date postDate;
+	private String text;
 
-    /**
-     * @return 
-     */
-    public String getTitle() {
-        return null;
-    }
+	private Date postDate;
 
-    /**
-     * @param title 
-     */
-    public void setTitle(String title) {
-    }
+	public String getTitle() {
+		return null;
+	}
 
-    /**
-     * @return 
-     */
-    public String getText() {
-        return null;
-    }
+	public void setTitle(String title) {
+	}
 
-    /**
-     * @param text 
-     */
-    public void setText(String text) {
-    }
+	public String getText() {
+		return null;
+	}
 
-    /**
-     * @return 
-     */
-    public Date getPostDate() {
-        return null;
-    }
+	public void setText(String text) {
+	}
 
-    /**
-     * @param postDate 
-     */
-    public void setPostDate(Date postDate) {
-    }
+	public Date getPostDate() {
+		return null;
+	}
+
+	public void setPostDate(Date postDate) {
+	}
 }
-
