@@ -50,7 +50,7 @@ public class Student extends User implements ViewTranscript {
 	public void confirmAttendance() {
 	}
 
-	public void viewOrganisation() {
+	public void viewOrganization() {
 	}
 
 	public boolean joinOrganization() {
