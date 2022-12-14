@@ -31,13 +31,7 @@ public class Student extends User implements ViewTranscript {
 		this.academicDegree = academicDegree;
 	}
 
-	public void viewCourses() {
-	}
-
 	public void viewStudentInfo() {
-	}
-
-	public void viewMarks() {
 	}
 
 	public void viewAttendance() {
@@ -47,6 +41,7 @@ public class Student extends User implements ViewTranscript {
 	}
 
 	public void viewOrganization() {
+		
 	}
 
 	public boolean joinOrganization(OrganizationName organization) {
