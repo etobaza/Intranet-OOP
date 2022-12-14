@@ -1,5 +1,5 @@
 package Main;
 
 public enum AcademicDegree {
-	BACHELOR, MASTER, PHD,HHH
+	BACHELOR, MASTER, PHD
 }
