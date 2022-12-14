@@ -103,13 +103,18 @@ public class User implements Comparable<User>, Serializable {
 		this.email = email;
 	}
 
-	public boolean getLoginStatus() {
+	public boolean isLoginStatus() {
 		return loginStatus;
 	}
 
 	public int compareTo(User other) {
 		int usernameComparison = username.compareTo(other.username);
 		return usernameComparison;
+	}
+
+	public String toString() {
+		return "User [firstName=" + firstName + ", lastName=" + lastName + ", id=" + id + ", username=" + username
+				+ ", sex=" + sex + ", age=" + age + ", email=" + email + ", loginStatus=" + loginStatus + "]";
 	}
 
 	public int hashCode() {

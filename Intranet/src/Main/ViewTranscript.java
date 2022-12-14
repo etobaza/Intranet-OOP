@@ -1,7 +1,6 @@
 package Main;
 
-public interface ViewTransript {
-
+public interface ViewTranscript {
 	public void viewTranscript();
 
 	public void getTranscript();

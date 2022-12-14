@@ -1,107 +1,29 @@
 package Main;
-import java.lang.*;
-import java.util.*;
 
-/**
- */
-public class Database extends Database {
-    /**
-     */
-    private String basePath;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-    /**
-     */
-    private String path;
+public class Database {
+	private String basePath;
+	private String path;
+	private List<User> users;
+	private List<Student> students;
+	private List<Teacher> teachers;
+	private List<Admin> admins;
+	private List<Manager> managers;
+	private Map<String, Course> courses;
+	private Map<String, List<LogFile>> logFiles;
 
-    /**
-     */
-    private HashSet users;
+	public Database() {
+		this.users = new ArrayList<>();
+		this.students = new ArrayList<>();
+		this.teachers = new ArrayList<>();
+		this.admins = new ArrayList<>();
+		this.managers = new ArrayList<>();
+		this.courses = new HashMap<>();
+		this.logFiles = new HashMap<>();
+	}
 
-    /**
-     */
-    private HashSet students;
-
-    /**
-     */
-    private HashSet teachers;
-
-    /**
-     */
-    private HashSet admins;
-
-    /**
-     */
-    private HashSet managers;
-
-    /**
-     */
-    private HashSet courses;
-
-    /**
-     */
-    private MultiMap logFiles;
-
-    /**
-     * @return 
-     */
-    public String getPath() {
-        return null;
-    }
-
-    /**
-     * @return 
-     */
-    public Instance getInstance() {
-        return null;
-    }
-
-    /**
-     * @return 
-     */
-    public HashSet getAllUsers() {
-        return null;
-    }
-
-    /**
-     * @return 
-     */
-    public HashSet getAllStudents() {
-        return null;
-    }
-
-    /**
-     * @return 
-     */
-    public HashSet getAllTeachers() {
-        return null;
-    }
-
-    /**
-     * @return 
-     */
-    public HashSet getAllAdmins() {
-        return null;
-    }
-
-    /**
-     * @return 
-     */
-    public HashSet getAllManagers() {
-        return null;
-    }
-
-    /**
-     * @return 
-     */
-    public HashSet getAllCourses() {
-        return null;
-    }
-
-    /**
-     * @return 
-     */
-    public MultiMap getAllLogs() {
-        return null;
-    }
 }
-

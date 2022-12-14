@@ -1,105 +1,97 @@
 package Main;
-/**
- */
-public class Student extends User implements Researcher, ViewTransript {
-    /**
-     */
-    private double gpa;
 
-    /**
-     */
-    private Faculty faculty;
+import java.util.Date;
+import java.util.Objects;
 
-    /**
-     */
-    private date dateOfJoin;
+public class Student extends User implements ViewTranscript {
+	private double gpa;
+	private Faculty faculty;
+	private Date enrollmentDate;
+	private boolean dormNeed;
+	private int course;
+	private OrganizationName organisation;
+	private Semester semester;
+	private AcademicDegree academicDegree;
 
-    /**
-     */
-    private int dormNeed;
+	public Student(String firstName, String lastName, String id, String username, String password, Sex sex, int age,
+			String email, double gpa, Faculty faculty, Date enrollmentDate, boolean dormNeed, int course,
+			OrganizationName organisation, Semester semester, AcademicDegree academicDegree) {
+		super(firstName, lastName, id, username, password, sex, age, email);
+		this.gpa = gpa;
+		this.faculty = faculty;
+		this.enrollmentDate = enrollmentDate;
+		this.dormNeed = dormNeed;
+		this.course = course;
+		this.organisation = organisation;
+		this.semester = semester;
+		this.academicDegree = academicDegree;
+	}
 
-    /**
-     */
-    private int course;
+	public void viewCourses() {
+	}
 
-    /**
-     */
-    private OrganisationName organisation;
+	public void viewStudentInfo() {
+	}
 
-    /**
-     */
-    private Semester semester;
+	public void viewMarks() {
+	}
 
-    /**
-     */
-    private AcademicDegree academicDegree;
+	public void viewAttendance() {
+	}
 
-    /**
-     */
-    public void viewCourses() {
-    }
+	public boolean addCourse() {
+		return false;
+	}
 
-    /**
-     */
-    public void viewStudentInfo() {
-    }
+	public boolean dropCourse() {
+		return false;
+	}
 
-    /**
-     */
-    public void viewMarks() {
-    }
+	public void confirmAttendance() {
+	}
 
-    /**
-     */
-    public void viewAttendance() {
-    }
+	public void viewOrganisation() {
+	}
 
-    /**
-     */
-    public void registrOrganisation() {
-    }
+	public boolean joinOrganization() {
+		return false;
+	}
 
-    /**
-     * @return 
-     */
-    public boolean addCourse() {
-        return false;
-    }
+	public boolean leaveOrganization() {
+		return false;
+	}
 
-    /**
-     * @return 
-     */
-    public boolean removceCourse() {
-        return false;
-    }
+	public void viewTranscript() {
+	}
 
-    /**
-     */
-    public void confirmAttendance() {
-    }
+	public void getTranscript() {
+	}
 
-    /**
-     */
-    public void viewOrganisation() {
-    }
+	public String toString() {
+		return "Student [gpa=" + gpa + ", faculty=" + faculty + ", dateOfJoin=" + enrollmentDate + ", dormNeed="
+				+ dormNeed + ", course=" + course + ", organisation=" + organisation + ", semester=" + semester
+				+ ", academicDegree=" + academicDegree + "]";
+	}
 
-    /**
-     * @return 
-     */
-    public boolean joinOrganistaion() {
-        return false;
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+				+ Objects.hash(academicDegree, course, enrollmentDate, dormNeed, faculty, gpa, organisation, semester);
+		return result;
+	}
 
-    /**
-     * @return 
-     */
-    public boolean leaveOrganisation() {
-        return false;
-    }
-
-    /**
-     */
-    public void getTransript() {
-    }
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Student other = (Student) obj;
+		return academicDegree == other.academicDegree && course == other.course
+				&& Objects.equals(dateOfJoin, other.dateOfJoin) && dormNeed == other.dormNeed
+				&& faculty == other.faculty && Double.doubleToLongBits(gpa) == Double.doubleToLongBits(other.gpa)
+				&& organisation == other.organisation && semester == other.semester;
+	}
 }
-
