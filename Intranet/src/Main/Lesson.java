@@ -11,7 +11,6 @@ public class Lesson {
 	private int room;
 
 	public Lesson(Course course, Day day, Format format, LessonType lessonType, int room) {
-		super();
 		this.course = course;
 		this.day = day;
 		this.format = format;

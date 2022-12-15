@@ -4,22 +4,20 @@ import java.util.Vector;
 
 public class Teacher extends Employee implements ViewInfoStudents, Create {
 	private String department;
-	private String course;
+	private Vector<Course> courses;
 	private TeacherTitle teacherTitle;
 	private Semester semester;
 	private Faculty faculty;
-	private Vector<Student> studentList;
 
 	public Teacher(String firstName, String lastName, String id, String username, String password, Sex sex, int age,
-			String email, double salary, String department, String course, TeacherTitle teacherTitle, Semester semester,
-			Faculty faculty, Vector<Student> studentList) {
+			String email, double salary, String department, Vector<Course> courses, TeacherTitle teacherTitle,
+			Semester semester, Faculty faculty) {
 		super(firstName, lastName, id, username, password, sex, age, email, salary);
 		this.department = department;
-		this.course = course;
+		this.courses = courses;
 		this.teacherTitle = teacherTitle;
 		this.semester = semester;
 		this.faculty = faculty;
-		this.studentList = studentList;
 	}
 
 	public String getDepartment() {
@@ -30,12 +28,15 @@ public class Teacher extends Employee implements ViewInfoStudents, Create {
 		this.department = department;
 	}
 
-	public String getCourse() {
-		return course;
+	public Vector<Course> getCourses() {
+		return courses;
 	}
 
-	public void setCourse(String course) {
-		this.course = course;
+	public void addCourse(Course course) {
+		if (!courses.contains(course)) {
+			courses.add(course);
+			course.addTeacher(this);
+		}
 	}
 
 	public TeacherTitle getTeacherTitle() {
@@ -54,19 +55,11 @@ public class Teacher extends Employee implements ViewInfoStudents, Create {
 		this.semester = semester;
 	}
 
-	public Vector<Student> getStudentList() {
-		return studentList;
-	}
-
-	public void setStudentList(Vector<Student> studentList) {
-		this.studentList = studentList;
-	}
-
 	public void setFaculty(Faculty faculty) {
 		this.faculty = faculty;
 	}
 
-	public boolean putMarks() {
+	public boolean putMark(Student student, Course course) {
 		return false;
 	}
 
@@ -88,7 +81,11 @@ public class Teacher extends Employee implements ViewInfoStudents, Create {
 		return false;
 	}
 
-	public boolean removeCourse() {
+	public boolean removeCourse(Course course) {
+		if (courses.contains(course)) {
+			courses.remove(course);
+			return true;
+		}
 		return false;
 	}
 

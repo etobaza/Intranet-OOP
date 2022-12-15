@@ -10,9 +10,13 @@ public class Course {
 	private int credits;
 	private String description;
 	private String courseId;
-	private Vector<Student> enrolled;
-	private Vector<Teacher> teachers;
-	private HashMap<Student, HashMap<Date, Mark>> marks;
+	//private Vector<Student> enrolled;
+	//private Vector<Teacher> teachers;
+	// Vector<Teacher> getTeachers() {
+	// Database.users.stream().filet(u->u instanceof Teacher)
+	//Database.teachers.stream().filter(t->t.courses.contains(this)).collect(Collectors.toList())
+}
+	private HashMap<Student, Mark> marks;
 	private Vector<Course> prerequisite;
 	private boolean isElective;
 	private Semester semester;
@@ -20,7 +24,7 @@ public class Course {
 	private int maxNumberOfStudents;
 
 	public Course(String name, int credits, String description, String courseId, Vector<Course> prerequisite,
-			boolean isElective, Semester semester, Faculty faculty, Vector<Teacher> teachers, int maxNumberOfStudents) {
+			boolean isElective, Semester semester, Faculty faculty, int maxNumberOfStudents) {
 		this.name = name;
 		this.credits = credits;
 		this.setDescription(description);
@@ -29,7 +33,7 @@ public class Course {
 		this.semester = semester;
 		this.isElective = isElective;
 		this.faculty = faculty;
-		this.teachers = teachers;
+		this.teachers = new Vector<Teacher>();
 		enrolled = new Vector<Student>();
 		this.maxNumberOfStudents = maxNumberOfStudents;
 
@@ -43,9 +47,14 @@ public class Course {
 				}
 			}
 			enrolled.add(student);
+			student.addCourse(this);
 			return true;
 		}
 		return false;
+	}
+
+	public Vector<Student> getEnrolled() {
+		return enrolled;
 	}
 
 	public String getName() {
@@ -53,7 +62,7 @@ public class Course {
 	}
 
 	public boolean removeStudent(Student student) {
-		return enrolled.remove(student);
+		return enrolled.remove(student) && student.dropCourse(this);
 	}
 
 	public int getCredits() {
@@ -85,24 +94,13 @@ public class Course {
 	}
 
 	public HashMap<Date, Mark> getMark(Student student) {
-		if (marks.containsKey(student)) {
-			return marks.get(student);
-		} else {
-			return null;
-		}
+		return null;
 	}
 
-	public void addMark(Student student, Date date, Mark mark) {
-		if (!marks.containsKey(student)) {
-			marks.put(student, new HashMap<Date, Mark>());
-		}
-		marks.get(student).put(date, mark);
+	public void addMark(Student student, Mark mark) {
 	}
 
 	public void removeMark(Student student, Date date) {
-		if (marks.containsKey(student)) {
-			marks.get(student).remove(date);
-		}
 	}
 
 	public void addTeacher(Teacher teacher) {
@@ -110,7 +108,10 @@ public class Course {
 	}
 
 	public void removeTeacher(Teacher teacher) {
-		teachers.remove(teacher);
+		if (teachers.contains(teacher)) {
+			teachers.remove(teacher);
+			teacher.removeCourse(this);
+		}
 	}
 
 	public Vector<Teacher> getTeachers() {
