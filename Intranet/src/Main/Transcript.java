@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Transcript {
 	private Journal journal;
-	private HashMap<Course, Double> transcript;f
+	private HashMap<Course, Double> transcript;
 
 	public Transcript(Student student, Journal journal) {
 		this.journal = journal;

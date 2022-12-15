@@ -3,7 +3,7 @@ package Main;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class Manager extends Employee implements ViewInfoStudents, ViewTransript, ViewTeachers, Create {
+public class Manager extends Employee implements ViewInfoStudents, ViewTranscript, ViewTeachers, Create {
 	private ManagerType type;
 	private ArrayList<News> news;
 	private Vector<Teacher> teachers;
@@ -14,7 +14,7 @@ public class Manager extends Employee implements ViewInfoStudents, ViewTransript
 		super(firstName, lastName, id, username, password, sex, age, email, salary);
 	}
 
-	public boolean approveStrudentRegistr() {
+	public boolean approveStudentReg() {
 		return false;
 	}
 
@@ -22,11 +22,8 @@ public class Manager extends Employee implements ViewInfoStudents, ViewTransript
 		return false;
 	}
 
-	public boolean addCoursesForRegistr() {
+	public boolean addCoursesForReg() {
 		return false;
-	}
-
-	public void viewStrudentInfo() {
 	}
 
 	public void manageNews() {
@@ -51,15 +48,15 @@ public class Manager extends Employee implements ViewInfoStudents, ViewTransript
 	public void assignTeacher() {
 	}
 
-	public boolean addOrganisation() {
+	public boolean addOrganization() {
 		return false;
 	}
 
-	public boolean updateOrganisation() {
+	public boolean updateOrganization() {
 		return false;
 	}
 
-	public boolean removeOrganisation() {
+	public boolean removeOrganization() {
 		return false;
 	}
 
@@ -79,10 +76,23 @@ public class Manager extends Employee implements ViewInfoStudents, ViewTransript
 	}
 
 	public boolean addToDB() {
+		return false;
 
 	}
 
 	public void viewStudents() {
 
+	}
+
+	public void viewStudentInfo() {
+
+	}
+
+	public String viewTranscript() {
+		return null;
+	}
+
+	public Transcript getTranscript() {
+		return null;
 	}
 }

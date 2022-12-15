@@ -4,5 +4,5 @@ public interface ViewInfoStudents {
 
 	public void viewStudents();
 
-	public void viewStrudentInfo();
+	public void viewStudentInfo();
 }

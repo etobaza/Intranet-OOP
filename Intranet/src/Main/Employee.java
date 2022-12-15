@@ -32,6 +32,9 @@ public class Employee extends User {
 		this.salary = salary;
 	}
 
+	public void sendReport() {
+	}
+
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
