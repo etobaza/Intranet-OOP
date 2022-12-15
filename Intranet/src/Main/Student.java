@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Vector;
 
-public class Student extends User implements ViewTranscript, Create {
+public class Student extends User implements ViewTranscript, Create, Advisor {
 	private double gpa;
 	private Faculty faculty;
 	private Date enrollmentDate;
