@@ -36,6 +36,10 @@ public class User implements Comparable<User>, Serializable {
 		return true;
 	}
 
+	public String getPassword() {
+		return encodedPassword;
+	}
+
 	public boolean login(String username, String password) {
 		if (username.equals(this.username)
 				&& Base64.getEncoder().encodeToString(password.getBytes()).equals(this.encodedPassword)) {

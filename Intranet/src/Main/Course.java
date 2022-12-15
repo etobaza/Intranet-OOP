@@ -1,5 +1,6 @@
 package Main;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Vector;
@@ -9,28 +10,39 @@ public class Course {
 	private int credits;
 	private String description;
 	private String courseId;
-	private Vector<Student> student;
-	private HashMap<Student, Mark> marks;
-	private String prerequisite;
+	private Vector<Student> enrolled;
+	private Vector<Teacher> teachers;
+	private HashMap<Student, HashMap<Date, Mark>> marks;
+	private Vector<Course> prerequisite;
 	private boolean isElective;
 	private Semester semester;
 	private Faculty faculty;
+	private int maxNumberOfStudents;
 
-	public Course(String name, int credits, String description, String courseId, String prerequisite, Semester semester,
-			Faculty faculty) {
+	public Course(String name, int credits, String description, String courseId, Vector<Course> prerequisite,
+			boolean isElective, Semester semester, Faculty faculty, Vector<Teacher> teachers, int maxNumberOfStudents) {
 		this.name = name;
 		this.credits = credits;
-		this.description = description;
-		this.courseId = courseId;
+		this.setDescription(description);
+		this.setCourseId(courseId);
 		this.prerequisite = prerequisite;
 		this.semester = semester;
+		this.isElective = isElective;
 		this.faculty = faculty;
-		student = new Vector<Student>();
+		this.teachers = teachers;
+		enrolled = new Vector<Student>();
+		this.maxNumberOfStudents = maxNumberOfStudents;
+
 	}
 
-	public boolean addStudent(Student students) {
-		if (!student.contains(students)) {
-			student.addAll(student);
+	public boolean addStudent(Student student) {
+		if (!enrolled.contains(student) && enrolled.size() < maxNumberOfStudents) {
+			for (Course course : prerequisite) {
+				if (!student.getCourses().contains(course)) {
+					return false;
+				}
+			}
+			enrolled.add(student);
 			return true;
 		}
 		return false;
@@ -40,19 +52,8 @@ public class Course {
 		return name;
 	}
 
-	public boolean removeStudent(Vector<Student> student2) {
-		return student.remove(student2);
-	}
-
-	public boolean dropCourse(Course courses) {
-		if (courses.removeStudent(student)) {
-			for (int i = 0; i < courses.credits; i++) {
-				if (courses == courses)
-					courses = null;
-			}
-			return true;
-		} else
-			return false;
+	public boolean removeStudent(Student student) {
+		return enrolled.remove(student);
 	}
 
 	public int getCredits() {
@@ -63,12 +64,69 @@ public class Course {
 		this.credits = credits;
 	}
 
-	public boolean isFull() {
+	public boolean isElective() {
 		return isElective;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(String courseId) {
+		this.courseId = courseId;
+	}
+
+	public HashMap<Date, Mark> getMark(Student student) {
+		if (marks.containsKey(student)) {
+			return marks.get(student);
+		} else {
+			return null;
+		}
+	}
+
+	public void addMark(Student student, Date date, Mark mark) {
+		if (!marks.containsKey(student)) {
+			marks.put(student, new HashMap<Date, Mark>());
+		}
+		marks.get(student).put(date, mark);
+	}
+
+	public void removeMark(Student student, Date date) {
+		if (marks.containsKey(student)) {
+			marks.get(student).remove(date);
+		}
+	}
+
+	public void addTeacher(Teacher teacher) {
+		teachers.add(teacher);
+	}
+
+	public void removeTeacher(Teacher teacher) {
+		teachers.remove(teacher);
+	}
+
+	public Vector<Teacher> getTeachers() {
+		return teachers;
+	}
+
+	public String toString() {
+		return "Course [name=" + name + ", credits=" + credits + ", description=" + description + ", courseId="
+				+ courseId + ", enrolled=" + enrolled + ", teachers=" + teachers + ", marks=" + marks
+				+ ", prerequisite=" + prerequisite + ", isElective=" + isElective + ", semester=" + semester
+				+ ", faculty=" + faculty + ", maxNumberOfStudents=" + maxNumberOfStudents + "]";
+	}
+
 	public int hashCode() {
-		return Objects.hash(credits);
+		return Objects.hash(courseId, credits, description, enrolled, faculty, isElective, marks, maxNumberOfStudents,
+				name, prerequisite, semester, teachers);
 	}
 
 	public boolean equals(Object obj) {
@@ -79,12 +137,12 @@ public class Course {
 		if (getClass() != obj.getClass())
 			return false;
 		Course other = (Course) obj;
-		return credits == other.credits;
-	}
-
-	public String toString() {
-		return "Course [ course=" + name + ", faculty=" + faculty + ", number of credits=" + credits + ", prerequisite="
-				+ prerequisite + ", semester=" + semester + "]";
+		return Objects.equals(courseId, other.courseId) && credits == other.credits
+				&& Objects.equals(description, other.description) && Objects.equals(enrolled, other.enrolled)
+				&& faculty == other.faculty && isElective == other.isElective && Objects.equals(marks, other.marks)
+				&& maxNumberOfStudents == other.maxNumberOfStudents && Objects.equals(name, other.name)
+				&& Objects.equals(prerequisite, other.prerequisite) && semester == other.semester
+				&& Objects.equals(teachers, other.teachers);
 	}
 
 }

@@ -4,9 +4,7 @@ import java.util.Objects;
 import java.util.Vector;
 
 public class Employee extends User {
-
 	private double salary;
-
 	private Vector<Message> messages;
 	{
 		messages = new Vector<Message>();

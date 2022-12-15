@@ -3,7 +3,6 @@ package Main;
 import java.util.Vector;
 
 public class Teacher extends Employee implements ViewInfoStudents, Create {
-
 	private String department;
 	private String course;
 	private TeacherTitle teacherTitle;
@@ -11,9 +10,10 @@ public class Teacher extends Employee implements ViewInfoStudents, Create {
 	private Faculty faculty;
 	private Vector<Student> studentList;
 
-	public Teacher(String department, String course, TeacherTitle teacherTitle, Semester semester, Faculty faculty,
-			Vector<Student> studentList) {
-		super();
+	public Teacher(String firstName, String lastName, String id, String username, String password, Sex sex, int age,
+			String email, double salary, String department, String course, TeacherTitle teacherTitle, Semester semester,
+			Faculty faculty, Vector<Student> studentList) {
+		super(firstName, lastName, id, username, password, sex, age, email, salary);
 		this.department = department;
 		this.course = course;
 		this.teacherTitle = teacherTitle;

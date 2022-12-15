@@ -1,39 +1,20 @@
 package Main;
 
-import java.util.*;
+import java.util.Date;
 
 public class Message {
-
 	private Employee messageFrom;
 	private Employee messageTo;
 	private String title;
 	private String text;
 	private Date messageDate;
 
-	public Message() {
-
-	}
-
-	public Message(Employee messageFrom, Employee messageTo, String title, String text, Date messageDate) {
+	public Message(Employee messageFrom, Employee messageTo, String title, String text) {
 		this.messageFrom = messageFrom;
 		this.messageTo = messageTo;
 		this.title = title;
 		this.text = text;
-		this.messageDate = messageDate;
-	}
-
-	public Message(String text) {
-		this.text = text;
-	}
-
-	public Message(String text, String title) {
-		this();
-		this.title = title;
-	}
-
-	public Message(String text, String title, Date messageDate) {
-		this();
-		this.messageDate = messageDate;
+		this.messageDate = new Date();
 	}
 
 	public Employee getMessageFrom() {
@@ -70,10 +51,6 @@ public class Message {
 
 	public Date getMessageDate() {
 		return messageDate;
-	}
-
-	public void setMessageDate(Date messageDate) {
-		this.messageDate = messageDate;
 	}
 
 	public String toString() {
