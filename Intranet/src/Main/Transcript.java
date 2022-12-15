@@ -5,12 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Transcript {
-	private Student student;
 	private Journal journal;
-	private HashMap<Course, Double> transcript;
+	private HashMap<Course, Double> transcript;f
 
 	public Transcript(Student student, Journal journal) {
-		this.student = student;
 		this.journal = journal;
 		this.transcript = new HashMap<>();
 

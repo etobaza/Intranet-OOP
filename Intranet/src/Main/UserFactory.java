@@ -13,12 +13,11 @@ public class UserFactory {
 			return new Teacher(userType, userType, null, null, null, null);
 
 		} else if (userType.equalsIgnoreCase("MANAGER")) {
-			return new Manager();
+			return new Manager(userType, userType, userType, userType, userType, null, 0, userType, 0);
 
 		} else if (userType.equalsIgnoreCase("ADMIN")) {
-			return new Admin();
+			return new Admin(userType, userType, userType, userType, userType, null, 0, userType, 0);
 		}
-
 		return null;
 	}
 }

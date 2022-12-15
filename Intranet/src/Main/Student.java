@@ -105,6 +105,10 @@ public class Student extends User implements ViewTranscript, Create {
 		return transcript.viewTranscript();
 	}
 
+	public String viewJournal(Course course) {
+		return journal.viewGrades(course);
+	}
+
 	public Journal getJournal() {
 		return journal;
 	}
