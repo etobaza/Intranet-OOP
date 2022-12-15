@@ -75,6 +75,26 @@ public class Student extends User implements ViewTranscript, Create {
 		}
 	}
 
+	public String viewTranscript() {
+		return transcript.viewTranscript();
+	}
+
+	public String viewJournal(Course course) {
+		return journal.viewGrades(course);
+	}
+
+	public Journal getJournal() {
+		return journal;
+	}
+
+	public Transcript getTranscript() {
+		return transcript;
+	}
+
+	public boolean addToDB() {
+		return true;
+	}
+
 	public String toString() {
 		return "Student [gpa=" + gpa + ", faculty=" + faculty + ", dateOfJoin=" + enrollmentDate + ", dormNeed="
 				+ dormNeed + ", course=" + year + ", semester=" + semester + ", academicDegree=" + academicDegree + "]";
@@ -99,25 +119,5 @@ public class Student extends User implements ViewTranscript, Create {
 				&& Objects.equals(enrollmentDate, other.enrollmentDate) && dormNeed == other.dormNeed
 				&& faculty == other.faculty && Double.doubleToLongBits(gpa) == Double.doubleToLongBits(other.gpa)
 				&& semester == other.semester;
-	}
-
-	public String viewTranscript() {
-		return transcript.viewTranscript();
-	}
-
-	public String viewJournal(Course course) {
-		return journal.viewGrades(course);
-	}
-
-	public Journal getJournal() {
-		return journal;
-	}
-
-	public Transcript getTranscript() {
-		return transcript;
-	}
-
-	public boolean addToDB() {
-		return true;
 	}
 }

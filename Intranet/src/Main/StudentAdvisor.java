@@ -16,7 +16,15 @@ public class StudentAdvisor implements Advisor {
 	}
 
 	public void addSubordinate(Student student) {
-		subordinates.add(student);
+		if (!subordinates.contains(student)) {
+			subordinates.add(student);
+		}
+	}
+
+	public void removeSubordinate(Student student) {
+		if (subordinates.contains(student)) {
+			subordinates.remove(student);
+		}
 	}
 
 	public String viewStudentJournal(Student student, Course course) {

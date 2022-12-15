@@ -16,7 +16,7 @@ public class User implements Comparable<User>, Serializable {
 	private int age;
 	private String email;
 	private boolean loginStatus;
-	private String encodedPassword;
+	private int hashPassword;
 
 	public User(String firstName, String lastName, String id, String username, String password, Sex sex, int age,
 			String email) {
@@ -28,21 +28,21 @@ public class User implements Comparable<User>, Serializable {
 		this.age = age;
 		this.email = email;
 		this.loginStatus = false;
-		this.encodedPassword = Base64.getEncoder().encodeToString(password.getBytes());
+		this.hashPassword = Objects.hash(password);
 	}
 
 	public boolean setPassword(String newPassword) {
-		this.encodedPassword = Base64.getEncoder().encodeToString(newPassword.getBytes());
+		this.hashPassword = Objects.hash(newPassword);
 		return true;
 	}
 
-	public String getPassword() {
-		return encodedPassword;
+	public int getPassword() {
+		return hashPassword;
 	}
 
 	public boolean login(String username, String password) {
 		if (username.equals(this.username)
-				&& Base64.getEncoder().encodeToString(password.getBytes()).equals(this.encodedPassword)) {
+				&& Objects.hash(password) == hashPassword) {
 			loginStatus = true;
 			return true;
 		}
@@ -125,7 +125,7 @@ public class User implements Comparable<User>, Serializable {
 	}
 
 	public int hashCode() {
-		return Objects.hash(age, email, firstName, id, lastName, loginStatus, encodedPassword, sex, username);
+		return Objects.hash(age, email, firstName, id, lastName, loginStatus, hashPassword, sex, username);
 	}
 
 	public boolean equals(Object obj) {

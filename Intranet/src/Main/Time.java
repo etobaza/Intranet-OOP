@@ -5,7 +5,6 @@ public class Time {
 	private int startTime;
 
 	public Time(int endTime, int startTime) {
-		super();
 		this.endTime = endTime;
 		this.startTime = startTime;
 	}
