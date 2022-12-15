@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 public class UserController implements Serializable {
 
@@ -18,7 +19,7 @@ public class UserController implements Serializable {
 	}
 
 	public boolean verifyLogin(String login, String password) {
-		return n.getUsername().equals(login) && n.getPassword().equals(password);
+		return n.getUsername().equals(login) && n.getPassword() == Objects.hash(password);
 	}
 
 	public void serialize() {
