@@ -10,12 +10,11 @@ public class Course {
 	private int credits;
 	private String description;
 	private String courseId;
-	//private Vector<Student> enrolled;
-	//private Vector<Teacher> teachers;
+	// private Vector<Student> enrolled;
+	// private Vector<Teacher> teachers;
 	// Vector<Teacher> getTeachers() {
 	// Database.users.stream().filet(u->u instanceof Teacher)
-	//Database.teachers.stream().filter(t->t.courses.contains(this)).collect(Collectors.toList())
-}
+	// Database.teachers.stream().filter(t->t.courses.contains(this)).collect(Collectors.toList())
 	private HashMap<Student, Mark> marks;
 	private Vector<Course> prerequisite;
 	private boolean isElective;
