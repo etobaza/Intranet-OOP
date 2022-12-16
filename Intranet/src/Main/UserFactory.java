@@ -10,8 +10,8 @@ public class UserFactory {
 					false, 0, null, null);
 
 		} else if (userType.equalsIgnoreCase("TEACHER")) {
-			return new Teacher(userType, userType, null, null, null, null, 0, userType, 0, userType, userType, null,
-					null, null, null);
+			return new Teacher(userType, userType, null, null, null, null, 0, userType, 0, userType, null, null, null,
+					null);
 
 		} else if (userType.equalsIgnoreCase("MANAGER")) {
 			return new Manager(userType, userType, userType, userType, userType, null, 0, userType, 0);
