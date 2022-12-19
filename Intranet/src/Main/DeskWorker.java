@@ -9,7 +9,10 @@ public class DeskWorker extends Employee {
 		this.workingState = workingState;
 	}
 
-	public boolean reviewCase() {
+	public boolean reviewCase(State workingState) {
+		if (workingState == State.FREE) {
+			return true;
+		}
 		return false;
 	}
 }

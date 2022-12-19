@@ -15,23 +15,26 @@ public class News {
 	}
 
 	public String getTitle() {
-		return null;
+		return title;
 	}
 
 	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getText() {
-		return null;
+		return text;
 	}
 
 	public void setText(String text) {
+		this.text = text;
 	}
 
 	public Date getPostDate() {
-		return null;
+		return postDate;
 	}
 
 	public void setPostDate(Date postDate) {
+		this.postDate = postDate;
 	}
 }
