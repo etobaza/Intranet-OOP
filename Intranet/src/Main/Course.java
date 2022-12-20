@@ -4,17 +4,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Vector;
+import java.util.stream.Collectors;
 
 public class Course {
 	private String name;
 	private int credits;
 	private String description;
 	private String courseId;
-	// private Vector<Student> enrolled;
-	// private Vector<Teacher> teachers;
-	// Vector<Teacher> getTeachers() {
-	// Database.users.stream().filet(u->u instanceof Teacher)
-	// Database.teachers.stream().filter(t->t.courses.contains(this)).collect(Collectors.toList())
 	private HashMap<Student, Mark> marks;
 	private Vector<Course> prerequisite;
 	private boolean isElective;
@@ -32,28 +28,28 @@ public class Course {
 		this.semester = semester;
 		this.isElective = isElective;
 		this.faculty = faculty;
-		this.teachers = new Vector<Teacher>();
-		enrolled = new Vector<Student>();
 		this.maxNumberOfStudents = maxNumberOfStudents;
-
 	}
 
 	public boolean addStudent(Student student) {
-		if (!enrolled.contains(student) && enrolled.size() < maxNumberOfStudents) {
+		if (!student.getCourses().contains(this)) {
 			for (Course course : prerequisite) {
 				if (!student.getCourses().contains(course)) {
 					return false;
 				}
 			}
-			enrolled.add(student);
-			student.addCourse(this);
-			return true;
+			if (getEnrolled().size() < maxNumberOfStudents) {
+				student.addCourse(this);
+				// Update the student in the database
+				Database.updateStudent(student);
+				return true;
+			}
 		}
 		return false;
 	}
 
 	public Vector<Student> getEnrolled() {
-		return enrolled;
+		return Database.students.stream().filter(s -> s.courses.contains(this)).collect(Collectors.toList());
 	}
 
 	public String getName() {
@@ -61,7 +57,7 @@ public class Course {
 	}
 
 	public boolean removeStudent(Student student) {
-		return enrolled.remove(student) && student.dropCourse(this);
+		return student.dropCourse(this) && Database.updateStudent(student);
 	}
 
 	public int getCredits() {
@@ -103,30 +99,27 @@ public class Course {
 	}
 
 	public void addTeacher(Teacher teacher) {
-		teachers.add(teacher);
+		teacher.addCourse(this);
 	}
 
 	public void removeTeacher(Teacher teacher) {
-		if (teachers.contains(teacher)) {
-			teachers.remove(teacher);
-			teacher.removeCourse(this);
-		}
+		teacher.removeCourse(this);
 	}
 
 	public Vector<Teacher> getTeachers() {
-		return teachers;
+		return Database.teachers.stream().filter(t -> t.courses.contains(this)).collect(Collectors.toList());
 	}
 
 	public String toString() {
 		return "Course [name=" + name + ", credits=" + credits + ", description=" + description + ", courseId="
-				+ courseId + ", enrolled=" + enrolled + ", teachers=" + teachers + ", marks=" + marks
-				+ ", prerequisite=" + prerequisite + ", isElective=" + isElective + ", semester=" + semester
-				+ ", faculty=" + faculty + ", maxNumberOfStudents=" + maxNumberOfStudents + "]";
+				+ courseId + ", marks=" + marks + ", prerequisite=" + prerequisite + ", isElective=" + isElective
+				+ ", semester=" + semester + ", faculty=" + faculty + ", maxNumberOfStudents=" + maxNumberOfStudents
+				+ "]";
 	}
 
 	public int hashCode() {
-		return Objects.hash(courseId, credits, description, enrolled, faculty, isElective, marks, maxNumberOfStudents,
-				name, prerequisite, semester, teachers);
+		return Objects.hash(courseId, credits, description, faculty, isElective, marks, maxNumberOfStudents, name,
+				prerequisite, semester);
 	}
 
 	public boolean equals(Object obj) {
@@ -138,11 +131,10 @@ public class Course {
 			return false;
 		Course other = (Course) obj;
 		return Objects.equals(courseId, other.courseId) && credits == other.credits
-				&& Objects.equals(description, other.description) && Objects.equals(enrolled, other.enrolled)
-				&& faculty == other.faculty && isElective == other.isElective && Objects.equals(marks, other.marks)
+				&& Objects.equals(description, other.description) && faculty == other.faculty
+				&& isElective == other.isElective && Objects.equals(marks, other.marks)
 				&& maxNumberOfStudents == other.maxNumberOfStudents && Objects.equals(name, other.name)
-				&& Objects.equals(prerequisite, other.prerequisite) && semester == other.semester
-				&& Objects.equals(teachers, other.teachers);
+				&& Objects.equals(prerequisite, other.prerequisite) && semester == other.semester;
 	}
 
 }
