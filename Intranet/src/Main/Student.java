@@ -62,17 +62,19 @@ public class Student extends User implements ViewTranscript, Create, Advisor {
 		return courses;
 	}
 
-	public void addCourse(Course course) {
-		if (!course.getEnrolled().contains(this)) {
+	public boolean addCourse(Course course) {
+		if (!course.getEnrolled().contains(this) && course.getLimit() > course.getEnrolled().size()) {
 			courses.add(course);
-			course.addStudent(this);
+			Database.updateStudent(this);
+			return true;
 		}
+		return false;
 	}
 
 	public boolean dropCourse(Course course) {
 		if (courses.contains(course)) {
-			course.removeStudent(this);
 			courses.remove(course);
+			Database.updateStudent(this);
 			return true;
 		}
 		return false;
