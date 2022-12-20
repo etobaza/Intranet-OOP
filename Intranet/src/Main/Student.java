@@ -16,6 +16,7 @@ public class Student extends User implements ViewTranscript, Create, Advisor {
 	private Vector<Course> courses;
 	private Transcript transcript;
 	private Journal journal;
+	private HashMap<Course, Mark> marks;
 
 	public Student(String firstName, String lastName, String id, String username, String password, Sex sex, int age,
 			String email, double gpa, Faculty faculty, Date enrollmentDate, boolean dormNeed, int year,

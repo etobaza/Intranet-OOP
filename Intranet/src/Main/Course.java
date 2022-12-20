@@ -11,7 +11,6 @@ public class Course {
 	private int credits;
 	private String description;
 	private String courseId;
-	private HashMap<Student, Mark> marks;
 	private Vector<Course> prerequisite;
 	private boolean isElective;
 	private Semester semester;
@@ -49,7 +48,8 @@ public class Course {
 	}
 
 	public Vector<Student> getEnrolled() {
-		return Database.students.stream().filter(s -> s.courses.contains(this)).collect(Collectors.toList());
+		return Database.students.stream().filter(s -> s.getCourses().contains(this))
+				.collect(Collectors.toCollection(Vector::new));
 	}
 
 	public String getName() {
@@ -107,18 +107,18 @@ public class Course {
 	}
 
 	public Vector<Teacher> getTeachers() {
-		return Database.teachers.stream().filter(t -> t.courses.contains(this)).collect(Collectors.toList());
+		return Database.teachers.stream().filter(t -> t.getCourses().contains(this))
+				.collect(Collectors.toCollection(Vector::new));
 	}
 
 	public String toString() {
 		return "Course [name=" + name + ", credits=" + credits + ", description=" + description + ", courseId="
-				+ courseId + ", marks=" + marks + ", prerequisite=" + prerequisite + ", isElective=" + isElective
-				+ ", semester=" + semester + ", faculty=" + faculty + ", maxNumberOfStudents=" + maxNumberOfStudents
-				+ "]";
+				+ courseId + ", prerequisite=" + prerequisite + ", isElective=" + isElective + ", semester=" + semester
+				+ ", faculty=" + faculty + ", maxNumberOfStudents=" + maxNumberOfStudents + "]";
 	}
 
 	public int hashCode() {
-		return Objects.hash(courseId, credits, description, faculty, isElective, marks, maxNumberOfStudents, name,
+		return Objects.hash(courseId, credits, description, faculty, isElective, maxNumberOfStudents, name,
 				prerequisite, semester);
 	}
 
@@ -132,9 +132,9 @@ public class Course {
 		Course other = (Course) obj;
 		return Objects.equals(courseId, other.courseId) && credits == other.credits
 				&& Objects.equals(description, other.description) && faculty == other.faculty
-				&& isElective == other.isElective && Objects.equals(marks, other.marks)
-				&& maxNumberOfStudents == other.maxNumberOfStudents && Objects.equals(name, other.name)
-				&& Objects.equals(prerequisite, other.prerequisite) && semester == other.semester;
+				&& isElective == other.isElective && maxNumberOfStudents == other.maxNumberOfStudents
+				&& Objects.equals(name, other.name) && Objects.equals(prerequisite, other.prerequisite)
+				&& semester == other.semester;
 	}
 
 }
