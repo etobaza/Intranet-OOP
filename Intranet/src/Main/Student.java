@@ -45,16 +45,20 @@ public class Student extends User implements ViewTranscript, Create, Advisor {
 				this.getEmail(), this.faculty, this.enrollmentDate, this.year, this.semester, this.academicDegree);
 	}
 
-	public Vector<Boolean> viewAttendance(Course course) {
+	public Vector<Boolean> attendedList(Course course) {
 		return attendances.get(course);
 	}
 
-	public void attendLesson(Lesson lesson) {
-		Course course = lesson.getCourse();
-		if (courses.contains(course)) {
-			Vector<Boolean> attendanceRecords = attendances.get(course);
-			attendanceRecords.add(true);
+	public boolean attendLesson(Lesson lesson, Teacher teacher) {
+		if (lesson.attendanceStatus()) {
+			Course course = lesson.getCourse();
+			Vector<Boolean> attendanceRecord = attendances.get(course);
+			attendanceRecord.add(true);
+			attendances.put(course, attendanceRecord);
+			teacher.recordAttendance(lesson, this);
+			return true;
 		}
+		return false;
 	}
 
 	public Vector<Organization> viewOrganizations() {
@@ -69,12 +73,12 @@ public class Student extends User implements ViewTranscript, Create, Advisor {
 
 	public void joinOrganization(Organization org) {
 		org.addCandidate(this);
-		Database.updateOrganizations(org);
+		Database.updateOrganization(org);
 	}
 
 	public void leaveOrganization(Organization org) {
 		org.leaveOrganization(this);
-		Database.updateOrganizations(org);
+		Database.updateOrganization(org);
 	}
 
 	public Vector<Course> getCourses() {
@@ -86,6 +90,7 @@ public class Student extends User implements ViewTranscript, Create, Advisor {
 			this.courses.add(course);
 			this.transcript = new Transcript(this, journal);
 			this.journal = new Journal(courses);
+			this.attendances.put(course, new Vector<Boolean>());
 			Database.updateStudent(this);
 			return true;
 		}
@@ -124,14 +129,17 @@ public class Student extends User implements ViewTranscript, Create, Advisor {
 	}
 
 	public String toString() {
-		return "Student [gpa=" + gpa + ", faculty=" + faculty + ", dateOfJoin=" + enrollmentDate + ", dormNeed="
-				+ dormNeed + ", course=" + year + ", semester=" + semester + ", academicDegree=" + academicDegree + "]";
+		return "Student [gpa=" + gpa + ", faculty=" + faculty + ", enrollmentDate=" + enrollmentDate + ", dormNeed="
+				+ dormNeed + ", year=" + year + ", semester=" + semester + ", academicDegree=" + academicDegree
+				+ ", courses=" + courses + ", transcript=" + transcript + ", journal=" + journal + ", marks=" + marks
+				+ ", attendances=" + attendances + "]";
 	}
 
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(academicDegree, year, enrollmentDate, dormNeed, faculty, gpa, semester);
+		result = prime * result + Objects.hash(academicDegree, attendances, courses, dormNeed, enrollmentDate, faculty,
+				gpa, journal, marks, semester, transcript, year);
 		return result;
 	}
 
@@ -143,9 +151,12 @@ public class Student extends User implements ViewTranscript, Create, Advisor {
 		if (getClass() != obj.getClass())
 			return false;
 		Student other = (Student) obj;
-		return academicDegree == other.academicDegree && year == other.year
-				&& Objects.equals(enrollmentDate, other.enrollmentDate) && dormNeed == other.dormNeed
-				&& faculty == other.faculty && Double.doubleToLongBits(gpa) == Double.doubleToLongBits(other.gpa)
-				&& semester == other.semester;
+		return academicDegree == other.academicDegree && Objects.equals(attendances, other.attendances)
+				&& Objects.equals(courses, other.courses) && dormNeed == other.dormNeed
+				&& Objects.equals(enrollmentDate, other.enrollmentDate) && faculty == other.faculty
+				&& Double.doubleToLongBits(gpa) == Double.doubleToLongBits(other.gpa)
+				&& Objects.equals(journal, other.journal) && Objects.equals(marks, other.marks)
+				&& semester == other.semester && Objects.equals(transcript, other.transcript) && year == other.year;
 	}
+
 }
