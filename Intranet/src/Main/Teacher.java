@@ -1,5 +1,6 @@
 package Main;
 
+import java.util.HashMap;
 import java.util.Vector;
 
 public class Teacher extends Employee implements ViewInfoStudents, Create {
@@ -8,6 +9,7 @@ public class Teacher extends Employee implements ViewInfoStudents, Create {
 	private TeacherTitle teacherTitle;
 	private Semester semester;
 	private Faculty faculty;
+	private HashMap<Lesson, HashMap<Student, Boolean>> attendanceRecords;
 
 	public Teacher(String firstName, String lastName, String id, String username, String password, Sex sex, int age,
 			String email, double salary, String department, Vector<Course> courses, TeacherTitle teacherTitle,
@@ -18,6 +20,7 @@ public class Teacher extends Employee implements ViewInfoStudents, Create {
 		this.teacherTitle = teacherTitle;
 		this.semester = semester;
 		this.faculty = faculty;
+		this.attendanceRecords = new HashMap<Lesson, HashMap<Student, Boolean>>();
 	}
 
 	public String getDepartment() {
@@ -96,13 +99,26 @@ public class Teacher extends Employee implements ViewInfoStudents, Create {
 		return false;
 	}
 
-	public void setAttendance() {
+	public void openAttendance(Lesson lesson) {
+		if (!attendanceRecords.containsKey(lesson)) {
+			HashMap<Student, Boolean> attendance = new HashMap<>();
+			attendanceRecords.put(lesson, attendance);
+		}
+		lesson.setAttendance(true);
 	}
 
-	public void putAttendance() {
+	public void closeAttendance(Lesson lesson) {
+		lesson.setAttendance(false);
 	}
 
-	public void viewAttendance() {
+	public void recordAttendance(Lesson lesson, Student student) {
+		HashMap<Student, Boolean> attendance = attendanceRecords.get(lesson);
+		attendance.put(student, true);
+		attendanceRecords.put(lesson, attendance);
+	}
+
+	public HashMap<Student, Boolean> getAttendanceRecords(Lesson lesson) {
+		return attendanceRecords.get(lesson);
 	}
 
 	public Faculty getFaculty() {
