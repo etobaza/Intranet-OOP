@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Message implements Serializable{
+	private static final long serialVersionUID = 924541240054761988L;
 	private Employee messageFrom;
 	private Employee messageTo;
 	private String title;

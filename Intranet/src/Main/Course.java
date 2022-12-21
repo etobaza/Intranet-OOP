@@ -7,7 +7,8 @@ import java.util.Objects;
 import java.util.Vector;
 import java.util.stream.Collectors;
 
-public class Course implements Comparable, Serializable {
+public class Course implements Comparable<Course>, Serializable {
+	private static final long serialVersionUID = -9078255111996827057L;
 	private String name;
 	private int credits;
 	private String description;
@@ -138,7 +139,7 @@ public class Course implements Comparable, Serializable {
 				&& semester == other.semester;
 	}
 
-	public int compareTo(Object o) {
+	public int compareTo(Course o) {
 		Course other = (Course) o;
 		if (this.name.equals(other.name)) {
 			return this.semester.compareTo(other.semester);

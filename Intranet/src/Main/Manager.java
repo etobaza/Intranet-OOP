@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 public class Manager extends Employee implements ViewInfoStudents, ViewTranscript, ViewTeachers, Create, Serializable {
+	private static final long serialVersionUID = 3493034322424476566L;
 	private ManagerType type;
 	private ArrayList<News> news;
 	private Vector<Teacher> teachers;

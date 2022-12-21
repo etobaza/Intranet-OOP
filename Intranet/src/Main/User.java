@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Vector;
 
 public class User implements Comparable<User>, Serializable {
+	private static final long serialVersionUID = 522695291421763322L;
 	private String firstName;
 	private String lastName;
 	private String id;

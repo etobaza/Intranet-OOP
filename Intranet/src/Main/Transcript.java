@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Transcript implements Serializable {
+	private static final long serialVersionUID = 1692018647946859481L;
 	private Journal journal;
 	private HashMap<Course, Double> transcript;
 

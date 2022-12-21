@@ -10,10 +10,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class UserController implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -3330920723864772251L;
 	User n;
-
 	public UserController(User u) {
 		this.n = u;
 	}

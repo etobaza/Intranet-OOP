@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Vector;
 
 public class Organization implements Serializable{
+	private static final long serialVersionUID = -4612648477718678953L;
 	private String name;
 	private Vector<Student> members;
 	private Student leader;

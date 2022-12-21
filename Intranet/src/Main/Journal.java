@@ -7,6 +7,7 @@ import java.util.TreeMap;
 import java.util.Vector;
 
 public class Journal implements Serializable{
+	private static final long serialVersionUID = 5041126817591070041L;
 	Map<Course, Map<Date, Double>> gradeJournal;
 	Vector<Course> userCourses;
 

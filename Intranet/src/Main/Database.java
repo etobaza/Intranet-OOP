@@ -13,6 +13,7 @@ import java.util.Vector;
 public final class Database implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private final static String BASE_PATH = "C:\\Users\\rblxx\\git\\finalIntranet\\Intranet";
+	@SuppressWarnings("unused")
 	private static Database instance = new Database(BASE_PATH);
 	private final String path;
 	private static Database obj;

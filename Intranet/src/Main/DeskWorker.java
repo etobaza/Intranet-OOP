@@ -1,6 +1,7 @@
 package Main;
 
 public class DeskWorker extends Employee {
+	private static final long serialVersionUID = -6125636279127791433L;
 	private State workingState;
 
 	public DeskWorker(String firstName, String lastName, String id, String username, String password, Sex sex, int age,

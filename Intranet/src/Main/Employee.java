@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.Vector;
 
 public class Employee extends User implements Serializable {
+	private static final long serialVersionUID = 8544409722007964965L;
 	private double salary;
 	private Vector<Message> messages;
 	{

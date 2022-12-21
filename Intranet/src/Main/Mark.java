@@ -3,6 +3,7 @@ package Main;
 import java.io.Serializable;
 
 public class Mark implements Serializable{
+	private static final long serialVersionUID = -221375337781799843L;
 	private Course course;
 	private int firstAttestation;
 	private int secondAttestation;

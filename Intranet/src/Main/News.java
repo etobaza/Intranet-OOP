@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class News implements Serializable{
+	private static final long serialVersionUID = -794633865571151941L;
 	private String title;
 	private String text;
 	private Date postDate;

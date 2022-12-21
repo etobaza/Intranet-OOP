@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Vector;
 
 public class Teacher extends Employee implements Create, Serializable {
+	private static final long serialVersionUID = 8064236395019936415L;
 	private String department;
 	private Vector<Course> courses;
 	private TeacherTitle teacherTitle;

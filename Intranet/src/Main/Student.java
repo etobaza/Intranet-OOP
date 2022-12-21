@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Vector;
 
 public class Student extends User implements ViewTranscript, Create, Advisor, Serializable {
+	private static final long serialVersionUID = 3588321203524637715L;
 	private double gpa;
 	private Faculty faculty;
 	private Date enrollmentDate;

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Lesson implements Serializable{
+	private static final long serialVersionUID = 6338373096898101263L;
 	private Course course;
 	private Day day;
 	private Format format;
