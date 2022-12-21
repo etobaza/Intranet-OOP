@@ -20,7 +20,7 @@ public class StudentAdvisor implements Advisor {
 			subordinates.add(student);
 		}
 	}
-	
+
 	public void removeSubordinate(Student student) {
 		if (subordinates.contains(student)) {
 			subordinates.remove(student);

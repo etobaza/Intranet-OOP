@@ -22,13 +22,18 @@ public final class Database {
 	public static Vector<Transcript> transcripts = new Vector<Transcript>();
 
 	public static boolean updateStudent(Student student) {
-		if (students.contains(student)) {
-			students.remove(student);
-			students.addElement(student);
+		if (student == null) {
+			System.out.println("Error: cannot be null");
+			return false;
+		}
+		int index = students.indexOf(student);
+		if (index >= 0) {
+			students.set(index, student);
 			return true;
-		} else
-			students.addElement(student);
-		return false;
+		} else {
+			students.add(student);
+			return false;
+		}
 	}
 
 	private Database(String path) {

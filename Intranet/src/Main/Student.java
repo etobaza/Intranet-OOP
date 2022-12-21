@@ -46,16 +46,24 @@ public class Student extends User implements ViewTranscript, Create, Advisor {
 	public void confirmAttendance() {
 	}
 
-	public void viewOrganization() {
-
+	public Vector<Organization> viewOrganizations() {
+		Vector<Organization> orgs = new Vector<>();
+		for (Organization org : Database.organizations) {
+			if (org.getMembers().contains(this)) {
+				orgs.add(org);
+			}
+		}
+		return orgs;
 	}
 
 	public void joinOrganization(Organization org) {
 		org.addCandidate(this);
+		Database.updateOrganizations(org);
 	}
 
 	public void leaveOrganization(Organization org) {
 		org.leaveOrganization(this);
+		Database.updateOrganizations(org);
 	}
 
 	public Vector<Course> getCourses() {
@@ -63,8 +71,10 @@ public class Student extends User implements ViewTranscript, Create, Advisor {
 	}
 
 	public boolean addCourse(Course course) {
-		if (!course.getEnrolled().contains(this) && course.getLimit() > course.getEnrolled().size()) {
-			courses.add(course);
+		if (course.getLimit() > course.getEnrolled().size() && !this.getCourses().contains(course)) {
+			this.courses.add(course);
+			this.transcript = new Transcript(this, journal);
+			this.journal = new Journal(courses);
 			Database.updateStudent(this);
 			return true;
 		}
@@ -72,8 +82,10 @@ public class Student extends User implements ViewTranscript, Create, Advisor {
 	}
 
 	public boolean dropCourse(Course course) {
-		if (courses.contains(course)) {
+		if (this.getCourses().contains(course)) {
 			courses.remove(course);
+			this.transcript = new Transcript(this, journal);
+			this.journal = new Journal(courses);
 			Database.updateStudent(this);
 			return true;
 		}
