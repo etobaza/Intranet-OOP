@@ -1,11 +1,18 @@
 package Main;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Vector;
 
-public final class Database {
-	private final static String BASE_PATH = "memememamomo";
+public final class Database implements Serializable {
+	private static final long serialVersionUID = 1L;
+	private final static String BASE_PATH = "C:\\Users\\lenovo\\eclipse-workspace\\unisystem\\Database\\";
 	private static Database instance = new Database(BASE_PATH);
 	private final String path;
+	private static Database obj;
 
 	public static Vector<User> users = new Vector<User>();
 	public static Vector<Student> students = new Vector<Student>();
@@ -217,7 +224,29 @@ public final class Database {
         }
 	}
 	
-	//serie
+	
+	
+	public static void saveDatabase() throws IOException {
+    	File file = new File("database.txt");
+    	file.createNewFile();
+    	if (!file.exists()) {
+    	    file.createNewFile();
+    	}
+    	if (!file.canWrite()) {
+    	    file.setWritable(true);
+    	}
+
+    	try {
+	        FileOutputStream fos = new FileOutputStream("database.txt");
+	        ObjectOutputStream oos = new ObjectOutputStream(fos);
+	        oos.writeObject(obj);
+	        oos.writeObject("hello");
+	        oos.close();
+	        System.out.println("The Object  was succesfully written to a file");
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    }
 
 	private Database(String path) {
 		this.path = path;
@@ -228,6 +257,11 @@ public final class Database {
 	}
 
 	public static Database getInstance() {
-		return instance;
-	}
+
+        if(obj == null) {
+           obj = new Database(BASE_PATH);
+        }
+
+         return obj;
+     }
 }
