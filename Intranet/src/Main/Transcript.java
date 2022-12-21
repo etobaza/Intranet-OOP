@@ -11,10 +11,14 @@ public class Transcript {
 	public Transcript(Student student, Journal journal) {
 		this.journal = journal;
 		this.transcript = new HashMap<>();
-
-		for (Course course : student.getCourses()) {
-			transcript.put(course, gpaForCourse(course));
+		try {
+			for (Course course : student.getCourses()) {
+				transcript.put(course, gpaForCourse(course));
+			}
+		} catch (java.lang.NullPointerException E) {
+			System.out.println("No student courses in Transcript");
 		}
+
 	}
 
 	public double gpaForCourse(Course course) {

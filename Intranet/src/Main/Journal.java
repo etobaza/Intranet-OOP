@@ -12,9 +12,14 @@ public class Journal {
 	public Journal(Vector<Course> courses) {
 		this.userCourses = courses;
 		gradeJournal = new TreeMap<>();
-		for (Course course : courses) {
-			gradeJournal.put(course, new TreeMap<>());
+		try {
+			for (Course course : courses) {
+				gradeJournal.put(course, new TreeMap<>());
+			}
+		} catch (java.lang.NullPointerException E) {
+			System.out.println("No userCourses in Journal.");
 		}
+
 	}
 
 	public void addGrade(Course course, double grade) {

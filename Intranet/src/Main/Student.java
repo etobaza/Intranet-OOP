@@ -30,12 +30,18 @@ public class Student extends User implements ViewTranscript, Create, Advisor {
 		this.year = year;
 		this.semester = semester;
 		this.academicDegree = academicDegree;
+		this.courses = new Vector<Course>();
 		this.journal = new Journal(courses);
 		this.transcript = new Transcript(this, journal);
 		this.attendances = new HashMap<>();
-		for (Course course : courses) {
-			attendances.put(course, new Vector<>());
+		try {
+			for (Course course : courses) {
+				attendances.put(course, new Vector<>());
+			}
+		} catch (java.lang.NullPointerException E) {
+			System.out.println("No courses in Student");
 		}
+
 	}
 
 	public String viewStudentInfo() {
