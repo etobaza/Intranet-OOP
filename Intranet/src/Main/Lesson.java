@@ -11,17 +11,23 @@ public class Lesson {
 	private Date date;
 	private int room;
 	private boolean attendance;
+	private Teacher teacher;
 
-	public Lesson(Course course, Day day, Format format, LessonType lessonType, int room) {
+	public Lesson(Course course, Day day, Format format, LessonType lessonType, int room, Teacher teacher) {
 		this.course = course;
 		this.setDay(day);
 		this.setFormat(format);
 		this.setLessonType(lessonType);
 		this.setDate(new Date());
 		this.setRoom(room);
+		this.teacher = teacher;
 	}
 
-	public boolean attendanceStatus() {
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public boolean isAttendance() {
 		return attendance;
 	}
 

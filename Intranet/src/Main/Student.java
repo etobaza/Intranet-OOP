@@ -49,13 +49,12 @@ public class Student extends User implements ViewTranscript, Create, Advisor {
 		return attendances.get(course);
 	}
 
-	public boolean attendLesson(Lesson lesson, Teacher teacher) {
-		if (lesson.attendanceStatus()) {
-			Course course = lesson.getCourse();
-			Vector<Boolean> attendanceRecord = attendances.get(course);
+	public boolean attendLesson(Lesson lesson) {
+		if (lesson.isAttendance()) {
+			Vector<Boolean> attendanceRecord = attendances.get(lesson.getCourse());
 			attendanceRecord.add(true);
-			attendances.put(course, attendanceRecord);
-			teacher.recordAttendance(lesson, this);
+			attendances.put(lesson.getCourse(), attendanceRecord);
+			lesson.getTeacher().recordAttendance(lesson, this);
 			return true;
 		}
 		return false;

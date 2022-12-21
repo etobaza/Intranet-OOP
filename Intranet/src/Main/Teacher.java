@@ -3,13 +3,14 @@ package Main;
 import java.util.HashMap;
 import java.util.Vector;
 
-public class Teacher extends Employee implements ViewInfoStudents, Create {
+public class Teacher extends Employee implements Create {
 	private String department;
 	private Vector<Course> courses;
 	private TeacherTitle teacherTitle;
 	private Semester semester;
 	private Faculty faculty;
 	private HashMap<Lesson, HashMap<Student, Boolean>> attendanceRecords;
+	private Vector<Lesson> hostedLessons;
 
 	public Teacher(String firstName, String lastName, String id, String username, String password, Sex sex, int age,
 			String email, double salary, String department, Vector<Course> courses, TeacherTitle teacherTitle,
@@ -21,6 +22,7 @@ public class Teacher extends Employee implements ViewInfoStudents, Create {
 		this.semester = semester;
 		this.faculty = faculty;
 		this.attendanceRecords = new HashMap<Lesson, HashMap<Student, Boolean>>();
+		this.hostedLessons = new Vector<Lesson>();
 	}
 
 	public String getDepartment() {
@@ -70,13 +72,6 @@ public class Teacher extends Employee implements ViewInfoStudents, Create {
 		return false;
 	}
 
-	public void viewStrudentInfo() {
-
-	}
-
-	public void viewCourses() {
-	}
-
 	public void viewMarks() {
 	}
 
@@ -95,8 +90,13 @@ public class Teacher extends Employee implements ViewInfoStudents, Create {
 	public void manageFiles() {
 	}
 
-	public boolean sendMessage() {
+	public boolean sendMessage(Employee employee, String text) {
 		return false;
+	}
+
+	public void hostLesson(Course course, Day day, Format format, LessonType lessonType, int room) {
+		Lesson lesson = new Lesson(course, day, format, lessonType, room, this);
+		hostedLessons.add(lesson);
 	}
 
 	public void openAttendance(Lesson lesson) {
@@ -122,18 +122,23 @@ public class Teacher extends Employee implements ViewInfoStudents, Create {
 	}
 
 	public Faculty getFaculty() {
-		return null;
+		return faculty;
 	}
 
 	public boolean addToDB() {
 		return false;
 	}
 
-	public void viewStudents() {
-
+	public void viewStudents(Course course) {
+		if (courses.contains(course)) {
+			System.out.println(course.getEnrolled());
+		}
 	}
 
-	public void viewStudentInfo() {
+	public void viewStudentInfo(Student student, Course course) {
+		if (this.getCourses().contains(course)) {
+			student.viewJournal(course);
+		}
 	}
 
 }
