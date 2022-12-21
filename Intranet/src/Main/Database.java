@@ -239,8 +239,8 @@ public final class Database implements Serializable {
     	}
 
     	try {
-	        FileOutputStream fos = new FileOutputStream("database.txt");
-	        ObjectOutputStream oos = new ObjectOutputStream(fos);
+	        FileOutputStream fs = new FileOutputStream("database.txt");
+	        ObjectOutputStream oos = new ObjectOutputStream(fs);
 	        oos.writeObject(obj);
 	        oos.flush();
 	        oos.close();
@@ -251,8 +251,8 @@ public final class Database implements Serializable {
     }
 	
 	public static void deserialize() throws IOException, ClassNotFoundException {
-    	FileInputStream fis = new FileInputStream("database.txt");
-    	ObjectInputStream ois = new ObjectInputStream(fis);
+    	FileInputStream fs = new FileInputStream("database.txt");
+    	ObjectInputStream ois = new ObjectInputStream(fs);
     	obj = (Database)ois.readObject();
     	ois.close();
     }
