@@ -207,7 +207,7 @@ public final class Database implements Serializable {
             return false;
         }
 	}
-
+	
 	
 	public static boolean updateTranscript(Transcript transcript) {
 		if (transcript == null) {
@@ -240,7 +240,7 @@ public final class Database implements Serializable {
 	        FileOutputStream fos = new FileOutputStream("database.txt");
 	        ObjectOutputStream oos = new ObjectOutputStream(fos);
 	        oos.writeObject(obj);
-	        oos.writeObject("hello");
+	        oos.flush();
 	        oos.close();
 	        System.out.println("The Object  was succesfully written to a file");
     	} catch(Exception e) {
