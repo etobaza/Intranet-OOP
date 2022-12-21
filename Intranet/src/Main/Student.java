@@ -92,7 +92,7 @@ public class Student extends User implements ViewTranscript, Create, Advisor, Se
 			this.transcript = new Transcript(this, journal);
 			this.journal = new Journal(courses);
 			this.attendances.put(course, new Vector<Boolean>());
-			Database.updateStudent(this);
+			Database.updateUser(this);
 			return true;
 		}
 		return false;
@@ -103,7 +103,7 @@ public class Student extends User implements ViewTranscript, Create, Advisor, Se
 			courses.remove(course);
 			this.transcript = new Transcript(this, journal);
 			this.journal = new Journal(courses);
-			Database.updateStudent(this);
+			Database.updateUser(this);
 			return true;
 		}
 		return false;

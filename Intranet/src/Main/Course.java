@@ -49,8 +49,8 @@ public class Course implements Comparable, Serializable {
 	}
 
 	public Vector<Student> getEnrolled() {
-		return Database.students.stream().filter(s -> s.getCourses().contains(this))
-				.collect(Collectors.toCollection(Vector::new));
+		return Database.users.stream().filter(user -> user instanceof Student).map(user -> (Student) user)
+				.filter(student -> student.getCourses().contains(this)).collect(Collectors.toCollection(Vector::new));
 	}
 
 	public String getName() {
@@ -108,8 +108,8 @@ public class Course implements Comparable, Serializable {
 	}
 
 	public Vector<Teacher> getTeachers() {
-		return Database.teachers.stream().filter(t -> t.getCourses().contains(this))
-				.collect(Collectors.toCollection(Vector::new));
+		return Database.users.stream().filter(u -> u instanceof Teacher).map(u -> (Teacher) u)
+				.filter(t -> t.getCourses().contains(this)).collect(Collectors.toCollection(Vector::new));
 	}
 
 	public String toString() {

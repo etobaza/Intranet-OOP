@@ -1,11 +1,12 @@
 package Main;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Vector;
 
-public class Journal {
+public class Journal implements Serializable{
 	Map<Course, Map<Date, Double>> gradeJournal;
 	Vector<Course> userCourses;
 
