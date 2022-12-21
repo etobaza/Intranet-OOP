@@ -5,11 +5,11 @@ import java.io.Serializable;
 public class Mark implements Serializable{
 	private static final long serialVersionUID = -221375337781799843L;
 	private Course course;
-	private int firstAttestation;
-	private int secondAttestation;
-	private int finalExam;
+	private double firstAttestation;
+	private double secondAttestation;
+	private double finalExam;
 
-	public Mark(Course course, int firstAttestation, int secondAttestation, int finalExam) {
+	public Mark(Course course, double firstAttestation, double secondAttestation, double finalExam) {
 		this.course = course;
 		this.firstAttestation = firstAttestation;
 		this.secondAttestation = secondAttestation;
@@ -30,5 +30,9 @@ public class Mark implements Serializable{
 
 	public Course getCourse() {
 		return course;
+	}
+
+	public double getFinalExam() {
+		return finalExam;
 	}
 }

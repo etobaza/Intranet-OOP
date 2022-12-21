@@ -1,7 +1,9 @@
 package Main;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 public class Teacher extends Employee implements Create, Serializable {
@@ -66,7 +68,36 @@ public class Teacher extends Employee implements Create, Serializable {
 		this.faculty = faculty;
 	}
 
-	public boolean putMark(Student student, Course course) {
+	public boolean getMarks(Student student, Course course) {
+		if (courses.contains(course)) {
+			Map<Date, Double> grades = student.getJournal().getGrades(course);
+			int firstAttestation = 0;
+			int secondAttestation = 0;
+			int finalExam = 0;
+			for (Map.Entry<Date, Double> grade : grades.entrySet()) {
+				Date date = grade.getKey();
+				Double value = grade.getValue();
+				if (date.before(student.getJournal().getFirstAttestationDate())) {
+					firstAttestation += value;
+				} else if (date.before(student.getJournal().getSecondAttestationDate())
+						&& date.after(student.getJournal().getFirstAttestationDate())) {
+					secondAttestation += value;
+				} else {
+					finalExam += value;
+				}
+			}
+			Mark mark = new Mark(course, firstAttestation, secondAttestation, finalExam);
+			student.getMarks().put(course, mark);
+			return true;
+		}
+		return false;
+	}
+
+	public boolean putGrade(Student student, Course course, double grade) {
+		if (courses.contains(course)) {
+			student.getJournal().addGrade(course, grade);
+			return true;
+		}
 		return false;
 	}
 

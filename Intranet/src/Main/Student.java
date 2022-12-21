@@ -126,6 +126,10 @@ public class Student extends User implements ViewTranscript, Create, Advisor, Se
 		return transcript;
 	}
 
+	public String getFullName() {
+		return getFirstName() + " " + getLastName();
+	}
+
 	public boolean addToDB() {
 		return true;
 	}
@@ -159,6 +163,10 @@ public class Student extends User implements ViewTranscript, Create, Advisor, Se
 				&& Double.doubleToLongBits(gpa) == Double.doubleToLongBits(other.gpa)
 				&& Objects.equals(journal, other.journal) && Objects.equals(marks, other.marks)
 				&& semester == other.semester && Objects.equals(transcript, other.transcript) && year == other.year;
+	}
+
+	public HashMap<Course, Mark> getMarks() {
+		return marks;
 	}
 
 }

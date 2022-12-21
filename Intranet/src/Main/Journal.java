@@ -1,12 +1,13 @@
 package Main;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Vector;
 
-public class Journal implements Serializable{
+public class Journal implements Serializable {
 	private static final long serialVersionUID = 5041126817591070041L;
 	Map<Course, Map<Date, Double>> gradeJournal;
 	Vector<Course> userCourses;
@@ -17,7 +18,6 @@ public class Journal implements Serializable{
 		for (Course course : courses) {
 			gradeJournal.put(course, new TreeMap<>());
 		}
-
 	}
 
 	public void addGrade(Course course, double grade) {
@@ -45,4 +45,21 @@ public class Journal implements Serializable{
 		return gradeJournal.get(course);
 	}
 
+	public Date getFirstAttestationDate() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.MONTH, Calendar.DECEMBER);
+		calendar.set(Calendar.YEAR, 2022);
+		calendar.set(Calendar.DAY_OF_MONTH, 22);
+		calendar.add(Calendar.MONTH, 3);
+		return calendar.getTime();
+	}
+
+	public Date getSecondAttestationDate() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.MONTH, Calendar.DECEMBER);
+		calendar.set(Calendar.YEAR, 2022);
+		calendar.set(Calendar.DAY_OF_MONTH, 22);
+		calendar.add(Calendar.MONTH, 6);
+		return calendar.getTime();
+	}
 }
