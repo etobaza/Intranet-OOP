@@ -1,8 +1,10 @@
 package Main;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Vector;
@@ -226,7 +228,7 @@ public final class Database implements Serializable {
 	
 	
 	
-	public static void saveDatabase() throws IOException {
+	public static void serialize() throws IOException {
     	File file = new File("database.txt");
     	file.createNewFile();
     	if (!file.exists()) {
@@ -246,6 +248,13 @@ public final class Database implements Serializable {
     	} catch(Exception e) {
     		e.printStackTrace();
     	}
+    }
+	
+	public static void deserialize() throws IOException, ClassNotFoundException {
+    	FileInputStream fis = new FileInputStream("database.txt");
+    	ObjectInputStream ois = new ObjectInputStream(fis);
+    	obj = (Database)ois.readObject();
+    	ois.close();
     }
 
 	private Database(String path) {
