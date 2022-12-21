@@ -17,6 +17,7 @@ public class Student extends User implements ViewTranscript, Create, Advisor {
 	private Transcript transcript;
 	private Journal journal;
 	private HashMap<Course, Mark> marks;
+	private HashMap<Course, Vector<Boolean>> attendances;
 
 	public Student(String firstName, String lastName, String id, String username, String password, Sex sex, int age,
 			String email, double gpa, Faculty faculty, Date enrollmentDate, boolean dormNeed, int year,
@@ -31,6 +32,10 @@ public class Student extends User implements ViewTranscript, Create, Advisor {
 		this.academicDegree = academicDegree;
 		this.journal = new Journal(courses);
 		this.transcript = new Transcript(this, journal);
+		this.attendances = new HashMap<>();
+		for (Course course : courses) {
+			attendances.put(course, new Vector<>());
+		}
 	}
 
 	public String viewStudentInfo() {
@@ -40,10 +45,16 @@ public class Student extends User implements ViewTranscript, Create, Advisor {
 				this.getEmail(), this.faculty, this.enrollmentDate, this.year, this.semester, this.academicDegree);
 	}
 
-	public void viewAttendance() {
+	public Vector<Boolean> viewAttendance(Course course) {
+		return attendances.get(course);
 	}
 
-	public void confirmAttendance() {
+	public void attendLesson(Lesson lesson) {
+		Course course = lesson.getCourse();
+		if (courses.contains(course)) {
+			Vector<Boolean> attendanceRecords = attendances.get(course);
+			attendanceRecords.add(true);
+		}
 	}
 
 	public Vector<Organization> viewOrganizations() {
