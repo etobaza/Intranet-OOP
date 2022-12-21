@@ -43,25 +43,25 @@ public class Course implements Comparable<Course>, Serializable {
 			return true;
 		}
 		return false;
-	}
-	/**
-	* Implements getter of Limit for Course class
-	*/
+	}/*
+		 * 
+		 * Implements getter of Limit for Course class
+		 */
 
 	public int getLimit() {
 		return maxNumberOfStudents;
-	}
-	/**
-	* Implements getter of Enrolled for Course class
-	*/
+	}/*
+		 * 
+		 * Implements getter of Enrolled for Course class
+		 */
 
 	public Vector<Student> getEnrolled() {
 		return Database.users.stream().filter(user -> user instanceof Student).map(user -> (Student) user)
 				.filter(student -> student.getCourses().contains(this)).collect(Collectors.toCollection(Vector::new));
-	}
-	/**
-	* Implements getter of name for Course class
-	*/
+	}/*
+		 * 
+		 * Implements getter of name for Course class
+		 */
 
 	public String getName() {
 		return name;
@@ -69,17 +69,17 @@ public class Course implements Comparable<Course>, Serializable {
 
 	public boolean removeStudent(Student student) {
 		return student.dropCourse(this);
-	}
-	/**
-	* Implements getter of credits for Course class
-	*/
+	}/*
+		 * 
+		 * Implements getter of credits for Course class
+		 */
 
 	public int getCredits() {
 		return credits;
-	}
-	/**
-	* Implements setter of Limit for Course class
-	*/
+	}/*
+		 * 
+		 * Implements setter of Limit for Course class
+		 */
 
 	public void setCredits(int credits) {
 		this.credits = credits;
@@ -89,38 +89,38 @@ public class Course implements Comparable<Course>, Serializable {
 		return isElective;
 	}
 
-	/**
-	* Implements getter of Description for Course class
-	*/
-
+	/*
+	 * 
+	 * Implements getter of Description for Course class
+	 */
 
 	public String getDescription() {
 		return description;
-	}
-	/**
-	* Implements setter of Description for Course class
-	*/
+	}/*
+		 * 
+		 * Implements setter of Description for Course class
+		 */
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	/**
-	* Implements getter of course id for Course class
-	*/
+	}/*
+		 * 
+		 * Implements getter of course id for Course class
+		 */
 
 	public String getCourseId() {
 		return courseId;
-	}
-	/**
-	*Implements setter of course id for Course class
-	*/
+	}/*
+		 * 
+		 * Implements setter of course id for Course class
+		 */
 
 	public void setCourseId(String courseId) {
 		this.courseId = courseId;
-	}
-	/**
-	* Implements getter of mark for Course class
-	*/	
+	}/*
+		 * 
+		 * Implements getter of mark for Course class
+		 */
 
 	public HashMap<Date, Mark> getMark(Student student) {
 		return null;
@@ -143,29 +143,29 @@ public class Course implements Comparable<Course>, Serializable {
 	public Vector<Teacher> getTeachers() {
 		return Database.users.stream().filter(u -> u instanceof Teacher).map(u -> (Teacher) u)
 				.filter(t -> t.getCourses().contains(this)).collect(Collectors.toCollection(Vector::new));
-	}
-	/**
-	* Returns the primitive value that we gave to the class of Course class
-	*/
+	}/*
+		 * 
+		 * Returns the primitive value that we gave to the
+		 * 
+		 * class of Course class
+		 */
 
 	public String toString() {
 		return "Course [name=" + name + ", credits=" + credits + ", description=" + description + ", courseId="
 				+ courseId + ", prerequisite=" + prerequisite + ", isElective=" + isElective + ", semester=" + semester
 				+ ", faculty=" + faculty + ", maxNumberOfStudents=" + maxNumberOfStudents + "]";
 	}
-	
-	/**
-	* hashCode() implementation by including  salary of the Course class
-	*/
 
-
+	/*
+	 * 
+	 * hashCode() implementation by including salary of the Course class
+	 */
 	public int hashCode() {
 		return Objects.hash(courseId, credits, description, faculty, isElective, maxNumberOfStudents, name,
 				prerequisite, semester);
-	}
-	/**
-	*Implementing equals() for Course class
-	*/
+	}/*
+		 * Implementing equals() for Course class
+		 */
 
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -180,12 +180,10 @@ public class Course implements Comparable<Course>, Serializable {
 				&& isElective == other.isElective && maxNumberOfStudents == other.maxNumberOfStudents
 				&& Objects.equals(name, other.name) && Objects.equals(prerequisite, other.prerequisite)
 				&& semester == other.semester;
-	}
-	/**
-	*Implementing compareTo()  for using comparator for Course class
-	*/
+	}/*
+		 * Implementing compareTo() for using comparator for Course class
+		 */
 
-	
 	public int compareTo(Course o) {
 		Course other = (Course) o;
 		if (this.name.equals(other.name)) {

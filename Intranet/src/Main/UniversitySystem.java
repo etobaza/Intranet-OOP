@@ -69,7 +69,7 @@ public class UniversitySystem {
 			break;
 		case "2":
 			System.out.println("Goodbye!");
-			sessionUser = null; // Set the sessionUser variable to null after a user logs out
+			sessionUser = null;
 			Database.serialize();
 			System.exit(0);
 			break;
@@ -80,270 +80,273 @@ public class UniversitySystem {
 	}
 
 	private static void displayStudentView() throws IOException {
-		System.out.println("Welcome, " + sessionUser.getFirstName() + "!");
-		while (true) {
-			System.out.println("1. View news");
-			System.out.println("2. View schedule");
-			System.out.println("3. Register for courses");
-			System.out.println("4. View transcript");
-			System.out.println("5. Logout");
-			System.out.print("Enter your choice: ");
-			String choice = reader.readLine();
-			switch (choice) {
-			case "1":
-				sessionUser.viewNews();
-				break;
-			case "2":
-				sessionUser.viewSchedule();
-				break;
-			case "3":
-				Vector<Course> courses = Database.getCourses();
-				Vector<Course> availableCourses = new Vector<Course>();
-				for (Course course : courses) {
-					if (!((Student) sessionUser).getCourses().contains(course)) {
-						availableCourses.add(course);
+		if (sessionUser instanceof Student) {
+			System.out.println("Welcome, " + sessionUser.getFirstName() + "!");
+			while (true) {
+				System.out.println("1. View news");
+				System.out.println("2. View schedule");
+				System.out.println("3. Register for courses");
+				System.out.println("4. View transcript");
+				System.out.println("5. Logout");
+				System.out.print("Enter your choice: ");
+				String choice = reader.readLine();
+				switch (choice) {
+				case "1":
+					sessionUser.viewNews();
+					break;
+				case "2":
+					sessionUser.viewSchedule();
+					break;
+				case "3":
+					Vector<Course> courses = Database.getCourses();
+					Vector<Course> availableCourses = new Vector<Course>();
+					for (Course course : courses) {
+						if (!((Student) sessionUser).getCourses().contains(course)) {
+							availableCourses.add(course);
+						}
 					}
-				}
-				if (availableCourses.isEmpty()) {
-					System.out.println("There are no available courses for you to enroll in.");
+					if (availableCourses.isEmpty()) {
+						System.out.println("There are no available courses for you to enroll in.");
+						break;
+					}
+					System.out.println("Available courses:");
+					for (int i = 0; i < availableCourses.size(); i++) {
+						System.out.println((i + 1) + ". " + availableCourses.get(i).getName());
+					}
+					System.out.println("Choose course, 0 to return back: ");
+					int courseIndex;
+					try {
+						courseIndex = Integer.parseInt(reader.readLine()) - 1;
+					} catch (NumberFormatException e) {
+						System.out.println("Error: Invalid input.");
+						break;
+					}
+					if (courseIndex < 0) {
+						break;
+					}
+					if (courseIndex >= availableCourses.size()) {
+						System.out.println("Error: Invalid course number.");
+						break;
+					}
+					Course selectedCourse = availableCourses.get(courseIndex);
+					if (selectedCourse.getLimit() <= 0) {
+						System.out.println("Sorry, this course is full.");
+						break;
+					}
+					((Student) sessionUser).addCourse(selectedCourse);
+					break;
+				case "4":
+					System.out.println(((Student) sessionUser).viewTranscript());
+					break;
+				case "5":
+					sessionUser.logout();
+					sessionUser = null;
+					displayCredentialsMenu();
+					break;
+				default:
+					System.out.println("Invalid choice. Try again.");
 					break;
 				}
-				System.out.println("Available courses:");
-				for (int i = 0; i < availableCourses.size(); i++) {
-					System.out.println((i + 1) + ". " + availableCourses.get(i).getName());
-				}
-				System.out.println("Choose course, 0 to return back: ");
-				int courseIndex;
-				try {
-					courseIndex = Integer.parseInt(reader.readLine()) - 1;
-				} catch (NumberFormatException e) {
-					System.out.println("Error: Invalid input.");
-					break;
-				}
-				if (courseIndex < 0) {
-					break;
-				}
-				if (courseIndex >= availableCourses.size()) {
-					System.out.println("Error: Invalid course number.");
-					break;
-				}
-				Course selectedCourse = availableCourses.get(courseIndex);
-				if (selectedCourse.getLimit() <= 0) {
-					System.out.println("Sorry, this course is full.");
-					break;
-				}
-				((Student) sessionUser).addCourse(selectedCourse);
-				break;
-			case "4":
-				System.out.println(((Student) sessionUser).viewTranscript());
-				break;
-			case "5":
-				sessionUser.logout();
-				sessionUser = null;
-				displayCredentialsMenu();
-				break;
-			default:
-				System.out.println("Invalid choice. Try again.");
-				break;
 			}
 		}
 	}
 
 	public static void displayTeacherView() throws IOException {
-		System.out.println("Welcome, " + sessionUser.getFirstName() + "!");
-		while (true) {
-			System.out.println("1. View news");
-			System.out.println("2. View schedule");
-			System.out.println("3. View students");
-			System.out.println("4. Put grade");
-			System.out.println("5. Show marks");
-			System.out.println("6. Logout");
-			System.out.print("Enter your choice: ");
-			String choice = reader.readLine();
-			switch (choice) {
-			case "1":
-				sessionUser.viewNews();
-				break;
-			case "2":
-				sessionUser.viewSchedule();
-				break;
-			case "3":
-				Vector<Course> courses = ((Teacher) sessionUser).getCourses();
-				if (courses.isEmpty()) {
-					System.out.println("You don't teach any courses.");
+		if (sessionUser instanceof Teacher) {
+			System.out.println("Welcome, " + sessionUser.getFirstName() + "!");
+			while (true) {
+				System.out.println("1. View news");
+				System.out.println("2. View schedule");
+				System.out.println("3. View students");
+				System.out.println("4. Put grade");
+				System.out.println("5. Show marks");
+				System.out.println("6. Logout");
+				System.out.print("Enter your choice: ");
+				String choice = reader.readLine();
+				switch (choice) {
+				case "1":
+					sessionUser.viewNews();
 					break;
-				}
-				System.out.println("Choose a course to view students for:");
-				for (int i = 0; i < courses.size(); i++) {
-					System.out.println((i + 1) + ". " + courses.get(i).getName());
-				}
-				System.out.println("Choose course, 0 to return back: ");
-				int courseIndex;
-				try {
-					courseIndex = Integer.parseInt(reader.readLine()) - 1;
-				} catch (NumberFormatException e) {
-					System.out.println("Error: Invalid input.");
+				case "2":
+					sessionUser.viewSchedule();
 					break;
-				}
-				if (courseIndex < 0) {
-					break;
-				}
-				if (courseIndex >= courses.size()) {
-					System.out.println("Error: Invalid course number.");
-					break;
-				}
-				Course selectedCourse = courses.get(courseIndex);
-				Vector<Student> students = selectedCourse.getEnrolled();
-				System.out.println("Students for " + selectedCourse.getName() + ":\n");
-				for (int i = 0; i < students.size(); i++) {
-					System.out.println(
-							(i + 1) + ". " + students.get(i).getFirstName() + " " + students.get(i).getLastName());
-				}
-				break;
-
-			case "4":
-				System.out.println("Choose a student to add a grade for:");
-				Vector<User> users = Database.getUsers();
-				students = new Vector<>();
-				for (User user : users) {
-					if (user instanceof Student) {
-						students.add((Student) user);
+				case "3":
+					Vector<Course> courses = ((Teacher) sessionUser).getCourses();
+					if (courses.isEmpty()) {
+						System.out.println("You don't teach any courses.");
+						break;
 					}
-				}
-				int i = 1;
-				for (Student student : students) {
-					System.out.println((i++) + ". " + student.getFirstName() + " " + student.getLastName());
-				}
-				System.out.print("Enter the number of the student: ");
-				int studentIndex;
-				try {
-					studentIndex = Integer.parseInt(reader.readLine()) - 1;
-				} catch (NumberFormatException e) {
-					System.out.println("Error: Invalid input.");
-					break;
-				}
-				if (studentIndex < 0 || studentIndex >= students.size()) {
-					System.out.println("Error: Invalid student number.");
-					break;
-				}
-				Student selectedStudent = students.get(studentIndex);
-				System.out.println("Choose a course to add a grade for:");
-				courses = ((Teacher) sessionUser).getCourses();
-				i = 1;
-				for (Course course : courses) {
-					System.out.println((i++) + ". " + course.getName());
-				}
-				System.out.print("Enter the number of the course: ");
-				try {
-					courseIndex = Integer.parseInt(reader.readLine()) - 1;
-				} catch (NumberFormatException e) {
-					System.out.println("Error: Invalid input.");
-					break;
-				}
-				if (courseIndex < 0 || courseIndex >= courses.size()) {
-					System.out.println("Error: Invalid course number.");
-					break;
-				}
-				selectedCourse = courses.get(courseIndex);
-				System.out.print("Enter the grade to add: ");
-				double grade;
-				try {
-					grade = Double.parseDouble(reader.readLine());
-				} catch (NumberFormatException e) {
-					System.out.println("Error: Invalid input.");
-					break;
-				}
-				if (!((Teacher) sessionUser).putGrade(selectedStudent, selectedCourse, grade)) {
-					System.out.println("Error: Could not add grade.");
-				} else {
-					System.out.println("Grade added successfully.");
-				}
-				break;
-
-			case "5":
-				// Get list of courses that the teacher teaches
-				courses = ((Teacher) sessionUser).getCourses();
-				if (courses.isEmpty()) {
-					System.out.println("You do not currently teach any courses.");
-					break;
-				}
-
-				// Print out list of courses and allow teacher to choose one
-				System.out.println("Choose a course to view student marks:");
-				for (i = 0; i < courses.size(); i++) {
-					System.out.println((i + 1) + ". " + courses.get(i).getName());
-				}
-				try {
-					courseIndex = Integer.parseInt(reader.readLine()) - 1;
-				} catch (NumberFormatException e) {
-					System.out.println("Error: Invalid input.");
-					break;
-				}
-				if (courseIndex < 0 || courseIndex >= courses.size()) {
-					System.out.println("Error: Invalid course number.");
-					break;
-				}
-				selectedCourse = courses.get(courseIndex);
-
-				users = Database.getUsers();
-				Vector<Student> studentsInCourse = new Vector<>();
-				for (User user : users) {
-					if (user instanceof Student && ((Student) user).getCourses().contains(selectedCourse)) {
-						studentsInCourse.add((Student) user);
+					System.out.println("Choose a course to view students for:");
+					for (int i = 0; i < courses.size(); i++) {
+						System.out.println((i + 1) + ". " + courses.get(i).getName());
 					}
+					System.out.println("Choose course, 0 to return back: ");
+					int courseIndex;
+					try {
+						courseIndex = Integer.parseInt(reader.readLine()) - 1;
+					} catch (NumberFormatException e) {
+						System.out.println("Error: Invalid input.");
+						break;
+					}
+					if (courseIndex < 0) {
+						break;
+					}
+					if (courseIndex >= courses.size()) {
+						System.out.println("Error: Invalid course number.");
+						break;
+					}
+					Course selectedCourse = courses.get(courseIndex);
+					Vector<Student> students = selectedCourse.getEnrolled();
+					System.out.println("Students for " + selectedCourse.getName() + ":\n");
+					for (int i = 0; i < students.size(); i++) {
+						System.out.println(
+								(i + 1) + ". " + students.get(i).getFirstName() + " " + students.get(i).getLastName());
+					}
+					break;
+
+				case "4":
+					System.out.println("Choose a student to add a grade for:");
+					Vector<User> users = Database.getUsers();
+					students = new Vector<>();
+					for (User user : users) {
+						if (user instanceof Student) {
+							students.add((Student) user);
+						}
+					}
+					int i = 1;
+					for (Student student : students) {
+						System.out.println((i++) + ". " + student.getFirstName() + " " + student.getLastName());
+					}
+					System.out.print("Enter the number of the student: ");
+					int studentIndex;
+					try {
+						studentIndex = Integer.parseInt(reader.readLine()) - 1;
+					} catch (NumberFormatException e) {
+						System.out.println("Error: Invalid input.");
+						break;
+					}
+					if (studentIndex < 0 || studentIndex >= students.size()) {
+						System.out.println("Error: Invalid student number.");
+						break;
+					}
+					Student selectedStudent = students.get(studentIndex);
+					System.out.println("Choose a course to add a grade for:");
+					courses = ((Teacher) sessionUser).getCourses();
+					i = 1;
+					for (Course course : courses) {
+						System.out.println((i++) + ". " + course.getName());
+					}
+					System.out.print("Enter the number of the course: ");
+					try {
+						courseIndex = Integer.parseInt(reader.readLine()) - 1;
+					} catch (NumberFormatException e) {
+						System.out.println("Error: Invalid input.");
+						break;
+					}
+					if (courseIndex < 0 || courseIndex >= courses.size()) {
+						System.out.println("Error: Invalid course number.");
+						break;
+					}
+					selectedCourse = courses.get(courseIndex);
+					System.out.print("Enter the grade to add: ");
+					double grade;
+					try {
+						grade = Double.parseDouble(reader.readLine());
+					} catch (NumberFormatException e) {
+						System.out.println("Error: Invalid input.");
+						break;
+					}
+					if (!((Teacher) sessionUser).putGrade(selectedStudent, selectedCourse, grade)) {
+						System.out.println("Error: Could not add grade.");
+					} else {
+						System.out.println("Grade added successfully.");
+					}
+					break;
+
+				case "5":
+					// Get list of courses that the teacher teaches
+					courses = ((Teacher) sessionUser).getCourses();
+					if (courses.isEmpty()) {
+						System.out.println("You do not currently teach any courses.");
+						break;
+					}
+
+					// Print out list of courses and allow teacher to choose one
+					System.out.println("Choose a course to view student marks:");
+					for (i = 0; i < courses.size(); i++) {
+						System.out.println((i + 1) + ". " + courses.get(i).getName());
+					}
+					try {
+						courseIndex = Integer.parseInt(reader.readLine()) - 1;
+					} catch (NumberFormatException e) {
+						System.out.println("Error: Invalid input.");
+						break;
+					}
+					if (courseIndex < 0 || courseIndex >= courses.size()) {
+						System.out.println("Error: Invalid course number.");
+						break;
+					}
+					selectedCourse = courses.get(courseIndex);
+
+					users = Database.getUsers();
+					Vector<Student> studentsInCourse = new Vector<>();
+					for (User user : users) {
+						if (user instanceof Student && ((Student) user).getCourses().contains(selectedCourse)) {
+							studentsInCourse.add((Student) user);
+						}
+					}
+
+					if (studentsInCourse.isEmpty()) {
+						System.out.println("There are no students enrolled in this course.");
+						break;
+					}
+
+					System.out.println("Choose a student to view marks:");
+					for (i = 0; i < studentsInCourse.size(); i++) {
+						System.out.println((i + 1) + ". " + studentsInCourse.get(i).getFirstName() + " "
+								+ studentsInCourse.get(i).getLastName());
+					}
+					try {
+						studentIndex = Integer.parseInt(reader.readLine()) - 1;
+					} catch (NumberFormatException e) {
+						System.out.println("Error: Invalid input.");
+						break;
+					}
+					if (studentIndex < 0 || studentIndex >= studentsInCourse.size()) {
+						System.out.println("Error: Invalid student number.");
+						break;
+					}
+					selectedStudent = studentsInCourse.get(studentIndex);
+					Map<Course, Mark> marks = selectedStudent.getMarks();
+					if (!marks.containsKey(selectedCourse)) {
+						System.out.println("This student does not have a mark for this course.");
+						break;
+					}
+					System.out.println("Marks for " + selectedStudent.getFirstName() + " "
+							+ selectedStudent.getLastName() + " in " + selectedCourse.getName() + ":");
+					marks = selectedStudent.getMarks();
+					if (marks.containsKey(selectedCourse)) {
+						Mark mark = marks.get(selectedCourse);
+						System.out.println("First attestation: " + mark.getFirstAttestation());
+						System.out.println("Second attestation: " + mark.getSecondAttestation());
+						System.out.println("Final exam: " + mark.getFinalExam());
+						System.out.println("Total: " + mark.getTotal());
+					} else {
+						System.out.println("This student does not have a mark for this course.");
+					}
+					break;
+
+				case "6":
+					sessionUser.logout();
+					sessionUser = null;
+					displayCredentialsMenu();
+					break;
+				default:
+					System.out.println("Invalid choice. Try again.");
+					break;
 				}
 
-				if (studentsInCourse.isEmpty()) {
-					System.out.println("There are no students enrolled in this course.");
-					break;
-				}
-
-				System.out.println("Choose a student to view marks:");
-				for (i = 0; i < studentsInCourse.size(); i++) {
-					System.out.println((i + 1) + ". " + studentsInCourse.get(i).getFirstName() + " "
-							+ studentsInCourse.get(i).getLastName());
-				}
-				try {
-					studentIndex = Integer.parseInt(reader.readLine()) - 1;
-				} catch (NumberFormatException e) {
-					System.out.println("Error: Invalid input.");
-					break;
-				}
-				if (studentIndex < 0 || studentIndex >= studentsInCourse.size()) {
-					System.out.println("Error: Invalid student number.");
-					break;
-				}
-				selectedStudent = studentsInCourse.get(studentIndex);
-				Map<Course, Mark> marks = selectedStudent.getMarks();
-				if (!marks.containsKey(selectedCourse)) {
-					System.out.println("This student does not have a mark for this course.");
-					break;
-				}
-				System.out.println("Marks for " + selectedStudent.getFirstName() + " " + selectedStudent.getLastName()
-						+ " in " + selectedCourse.getName() + ":");
-				marks = selectedStudent.getMarks();
-				if (marks.containsKey(selectedCourse)) {
-					Mark mark = marks.get(selectedCourse);
-					System.out.println("First attestation: " + mark.getFirstAttestation());
-					System.out.println("Second attestation: " + mark.getSecondAttestation());
-					System.out.println("Final exam: " + mark.getFinalExam());
-					System.out.println("Total: " + mark.getTotal());
-				} else {
-					System.out.println("This student does not have a mark for this course.");
-				}
-				break;
-
-			case "6":
-				sessionUser.logout();
-				sessionUser = null;
-				displayCredentialsMenu();
-				break;
-			default:
-				System.out.println("Invalid choice. Try again.");
-				break;
 			}
-
 		}
 	}
-
 }

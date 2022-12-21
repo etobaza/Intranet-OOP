@@ -40,9 +40,10 @@ public class Student extends User implements ViewTranscript, Create, Advisor, Se
 			attendances.put(course, new Vector<>());
 		}
 	}
+
 	/**
-	* The student can see all his information
-	*/
+	 * The student can see all his information
+	 */
 
 	public String viewStudentInfo() {
 		return String.format(
@@ -50,17 +51,19 @@ public class Student extends User implements ViewTranscript, Create, Advisor, Se
 				this.getFirstName(), this.getLastName(), this.getId(), this.getUsername(), this.getSex(), this.getAge(),
 				this.getEmail(), this.faculty, this.enrollmentDate, this.year, this.semester, this.academicDegree);
 	}
+
 	/**
-	* returns an attachment that takes data from the course
-	*/
+	 * returns an attachment that takes data from the course
+	 */
 
 	public Vector<Boolean> attendedList(Course course) {
 		return attendances.get(course);
 	}
-	
+
 	/**
-	* when the teacher opens an attachment for a certain course, the student can check in
-	*/
+	 * when the teacher opens an attachment for a certain course, the student can
+	 * check in
+	 */
 
 	public boolean attendLesson(Lesson lesson) {
 		if (lesson.isAttendance()) {
@@ -72,9 +75,10 @@ public class Student extends User implements ViewTranscript, Create, Advisor, Se
 		}
 		return false;
 	}
+
 	/**
-	* can see which organizations exist
-	*/
+	 * can see which organizations exist
+	 */
 
 	public Vector<Organization> viewOrganizations() {
 		Vector<Organization> orgs = new Vector<>();
@@ -85,33 +89,38 @@ public class Student extends User implements ViewTranscript, Create, Advisor, Se
 		}
 		return orgs;
 	}
+
 	/**
-	* To join the organization, to begin with, it is added to the list of candidates
-	*/
+	 * To join the organization, to begin with, it is added to the list of
+	 * candidates
+	 */
 
 	public void joinOrganization(Organization org) {
 		org.addCandidate(this);
 		Database.updateOrganization(org);
 	}
+
 	/**
-	* The student can leave the organization
-	*/
+	 * The student can leave the organization
+	 */
 
 	public void leaveOrganization(Organization org) {
 		org.leaveOrganization(this);
 		Database.updateOrganization(org);
 	}
+
 	/**
-	* Implements getter of courses for Student class
-	*/
+	 * Implements getter of courses for Student class
+	 */
 
 	public Vector<Course> getCourses() {
 		return courses;
 	}
-	/**
-	*If his limit for adding a course does not exceed, then he can add a course that has a journal and an attendance
-	*/
 
+	/**
+	 * If his limit for adding a course does not exceed, then he can add a course
+	 * that has a journal and an attendance
+	 */
 	public boolean addCourse(Course course) {
 		if (course.getLimit() > course.getEnrolled().size() && !this.getCourses().contains(course)) {
 			this.courses.add(course);
@@ -123,9 +132,10 @@ public class Student extends User implements ViewTranscript, Create, Advisor, Se
 		}
 		return false;
 	}
+
 	/**
-	*Can drop the course and it will be removed from the transcript and journal
-	*/
+	 * Can drop the course and it will be removed from the transcript and journal
+	 */
 
 	public boolean dropCourse(Course course) {
 		if (this.getCourses().contains(course)) {
@@ -137,37 +147,42 @@ public class Student extends User implements ViewTranscript, Create, Advisor, Se
 		}
 		return false;
 	}
+
 	/**
-	* Can view transcript
-	*/
+	 * Can view transcript
+	 */
 
 	public String viewTranscript() {
 		return transcript.viewTranscript();
 	}
+
 	/**
-	*Can view Journal
-	*/
+	 * Can view Journal
+	 */
 
 	public String viewJournal(Course course) {
 		return journal.viewGrades(course);
 	}
+
 	/**
-	* Implements getter of journal for Student class
-	*/
+	 * Implements getter of journal for Student class
+	 */
 
 	public Journal getJournal() {
 		return journal;
 	}
+
 	/**
-	* Implements getter of journal for Student class
-	*/
+	 * Implements getter of journal for Student class
+	 */
 
 	public Transcript getTranscript() {
 		return transcript;
 	}
+
 	/**
-	* Implements getter of full name for Student class
-	*/
+	 * Implements getter of full name for Student class
+	 */
 
 	public String getFullName() {
 		return getFirstName() + " " + getLastName();
@@ -176,9 +191,10 @@ public class Student extends User implements ViewTranscript, Create, Advisor, Se
 	public boolean addToDB() {
 		return true;
 	}
+
 	/**
-	* Returns the primitive value that we gave to the class of Student class
-	*/
+	 * Returns the primitive value that we gave to the class of Student class
+	 */
 
 	public String toString() {
 		return "Student [gpa=" + gpa + ", faculty=" + faculty + ", enrollmentDate=" + enrollmentDate + ", dormNeed="
@@ -186,9 +202,10 @@ public class Student extends User implements ViewTranscript, Create, Advisor, Se
 				+ ", courses=" + courses + ", transcript=" + transcript + ", journal=" + journal + ", marks=" + marks
 				+ ", attendances=" + attendances + "]";
 	}
+
 	/**
-	* hashCode() implementation by including  salary of the Student class
-	*/
+	 * hashCode() implementation by including salary of the Student class
+	 */
 
 	public int hashCode() {
 		final int prime = 31;
@@ -197,9 +214,10 @@ public class Student extends User implements ViewTranscript, Create, Advisor, Se
 				gpa, journal, marks, semester, transcript, year);
 		return result;
 	}
+
 	/**
-	*Implementing equals() for Student class
-	*/
+	 * Implementing equals() for Student class
+	 */
 
 	public boolean equals(Object obj) {
 		if (this == obj)

@@ -30,30 +30,32 @@ public class Teacher extends Employee implements Create, Serializable {
 	}
 
 	/**
-	* Implements getter of Department for Teacher class
-	*/
+	 * Implements getter of Department for Teacher class
+	 */
 
 	public String getDepartment() {
 		return department;
 	}
 
 	/**
-	* Implements setter of Department for Teacher class
-	*/
+	 * Implements setter of Department for Teacher class
+	 */
 
 	public void setDepartment(String department) {
 		this.department = department;
 	}
+
 	/**
-	* Implements getter of Courses for Teacher class
-	*/
+	 * Implements getter of Courses for Teacher class
+	 */
 
 	public Vector<Course> getCourses() {
 		return courses;
 	}
+
 	/**
-	* Add a course to a teacher to teach there
-	*/
+	 * Add a course to a teacher to teach there
+	 */
 
 	public void addCourse(Course course) {
 		if (!courses.contains(course)) {
@@ -61,41 +63,46 @@ public class Teacher extends Employee implements Create, Serializable {
 			course.addTeacher(this);
 		}
 	}
+
 	/**
-	*Implements getter of Teacher Title for Teacher class
-	*/
+	 * Implements getter of Teacher Title for Teacher class
+	 */
 
 	public TeacherTitle getTeacherTitle() {
 		return teacherTitle;
 	}
+
 	/**
-	*Implements setter of Teacher Title for Teacher class
-	*/
+	 * Implements setter of Teacher Title for Teacher class
+	 */
 
 	public void setTeacherTitle(TeacherTitle teacherTitle) {
 		this.teacherTitle = teacherTitle;
 	}
+
 	/**
-	* Implements getter of Semester for Teacher class
-	*/
+	 * Implements getter of Semester for Teacher class
+	 */
 
 	public Semester getSemester() {
 		return semester;
 	}
+
 	/**
-	* Implements setter of Semester for Teacher class
-	*/
+	 * Implements setter of Semester for Teacher class
+	 */
 	public void setSemester(Semester semester) {
 		this.semester = semester;
 	}
+
 	/**
-	* Implements setter of Faculty for Teacher class
-	*/
+	 * Implements setter of Faculty for Teacher class
+	 */
 
 	public void setFaculty(Faculty faculty) {
 		this.faculty = faculty;
 	}
-	
+
 	public boolean getMarks(Student student, Course course) {
 		if (courses.contains(course)) {
 			Map<Date, Double> grades = student.getJournal().getGrades(course);
@@ -120,10 +127,11 @@ public class Teacher extends Employee implements Create, Serializable {
 		}
 		return false;
 	}
+
 	/**
-	* A teacher can give a grade to a certain student for a certain course
-	*/
-	
+	 * A teacher can give a grade to a certain student for a certain course
+	 */
+
 	public boolean putGrade(Student student, Course course, double grade) {
 		if (courses.contains(course)) {
 			student.getJournal().addGrade(course, grade);
@@ -142,9 +150,10 @@ public class Teacher extends Employee implements Create, Serializable {
 	public boolean addCourse() {
 		return false;
 	}
+
 	/**
-	* can remove course
-	*/
+	 * can remove course
+	 */
 	public boolean removeCourse(Course course) {
 		if (courses.contains(course)) {
 			courses.remove(course);
@@ -155,24 +164,27 @@ public class Teacher extends Employee implements Create, Serializable {
 
 	public void manageFiles() {
 	}
+
 	/**
-	* Can send a text message to employees
-	*/
+	 * Can send a text message to employees
+	 */
 
 	public boolean sendMessage(Employee employee, String text) {
 		return false;
 	}
+
 	/**
-	* The lesson that the teacher conducted ( day, format, type of lesson, room )
-	*/
+	 * The lesson that the teacher conducted ( day, format, type of lesson, room )
+	 */
 
 	public void hostLesson(Course course, Day day, Format format, LessonType lessonType, int room) {
 		Lesson lesson = new Lesson(course, day, format, lessonType, room, this);
 		hostedLessons.add(lesson);
 	}
+
 	/**
-	* Opens an attendance for a specific lesson
-	*/
+	 * Opens an attendance for a specific lesson
+	 */
 
 	public void openAttendance(Lesson lesson) {
 		if (!attendanceRecords.containsKey(lesson)) {
@@ -181,32 +193,36 @@ public class Teacher extends Employee implements Create, Serializable {
 		}
 		lesson.setAttendance(true);
 	}
+
 	/**
-	*Closes an attendance for a specific lesson 
-	*/
+	 * Closes an attendance for a specific lesson
+	 */
 
 	public void closeAttendance(Lesson lesson) {
 		lesson.setAttendance(false);
 	}
+
 	/**
-	*Maintain the student's presence
-	*/
+	 * Maintain the student's presence
+	 */
 
 	public void recordAttendance(Lesson lesson, Student student) {
 		HashMap<Student, Boolean> attendance = attendanceRecords.get(lesson);
 		attendance.put(student, true);
 		attendanceRecords.put(lesson, attendance);
 	}
+
 	/**
-	* Implements getter of Attendance Record for Teacher class
-	*/
+	 * Implements getter of Attendance Record for Teacher class
+	 */
 
 	public HashMap<Student, Boolean> getAttendanceRecords(Lesson lesson) {
 		return attendanceRecords.get(lesson);
 	}
+
 	/**
-	* Implements getter of Faculty for Teacher class
-	*/
+	 * Implements getter of Faculty for Teacher class
+	 */
 
 	public Faculty getFaculty() {
 		return faculty;
@@ -215,19 +231,20 @@ public class Teacher extends Employee implements Create, Serializable {
 	public boolean addToDB() {
 		return false;
 	}
+
 	/**
-	*Can view students
-	*/
+	 * Can view students
+	 */
 
 	public void viewStudents(Course course) {
 		if (courses.contains(course)) {
 			System.out.println(course.getEnrolled());
 		}
 	}
-	/**
-	*Can view students info 
-	*/
 
+	/**
+	 * Can view students info
+	 */
 
 	public void viewStudentInfo(Student student, Course course) {
 		if (this.getCourses().contains(course)) {
