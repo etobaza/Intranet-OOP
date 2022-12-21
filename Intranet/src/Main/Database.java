@@ -244,7 +244,7 @@ public final class Database implements Serializable {
 	        oos.writeObject(obj);
 	        oos.flush();
 	        oos.close();
-	        System.out.println("The Object  was succesfully written to a file");
+	        System.out.println("Serialization complete");
     	} catch(Exception e) {
     		e.printStackTrace();
     	}
