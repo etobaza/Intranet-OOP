@@ -1,23 +1,20 @@
 package Main;
 
 public class UserFactory {
-	public Create getUser(String userType) {
-		if (userType == null) {
-			return null;
+	
+	public static User getUser(String firstName, String lastName, String id, String username, String password, Sex sex, int age,
+			String email, String userType) {
+		if(userType == "ADMIN"){
+			return new Admin(firstName, userType, userType, userType, userType, null, 0, userType, 0);
 		}
-		if (userType.equalsIgnoreCase("STUDENT")) {
-			return new Student(userType, userType, userType, userType, userType, null, 0, userType, 0, null, null,
-					false, 0, null, null);
-
-		} else if (userType.equalsIgnoreCase("TEACHER")) {
-			return new Teacher(userType, userType, null, null, null, null, 0, userType, 0, userType, null, null, null,
-					null);
-
-		} else if (userType.equalsIgnoreCase("MANAGER")) {
-			return new Manager(userType, userType, userType, userType, userType, null, 0, userType, 0);
-
-		} else if (userType.equalsIgnoreCase("ADMIN")) {
-			return new Admin(userType, userType, userType, userType, userType, null, 0, userType, 0);
+		if(userType == "STUDENT"){
+			return new Student(userType, userType, userType, userType, userType, sex, age, userType, age, null, null, false, age, null, null);
+		}
+		if(userType == "MANAGER"){
+			return new Manager(userType, userType, userType, userType, userType, sex, age, userType, age);
+		}
+		if(userType == "TEACHER"){
+			return new Teacher(userType, userType, userType, userType, userType, sex, age, userType, age, userType, null, null, null, null);
 		}
 		return null;
 	}
