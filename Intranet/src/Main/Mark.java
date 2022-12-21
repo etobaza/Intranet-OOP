@@ -13,4 +13,19 @@ public class Mark {
 		this.finalExam = finalExam;
 	}
 
+	public double getFirstAttestation() {
+		return firstAttestation;
+	}
+
+	public double getSecondAttestation() {
+		return secondAttestation;
+	}
+
+	public double getTotal() {
+		return firstAttestation * 0.3 + secondAttestation * 0.3 + finalExam * 0.4;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
 }

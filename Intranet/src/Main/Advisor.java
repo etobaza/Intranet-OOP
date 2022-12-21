@@ -1,5 +1,4 @@
 package Main;
 
-public interface Advisor
-{
+public interface Advisor {
 }

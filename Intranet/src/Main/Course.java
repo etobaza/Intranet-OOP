@@ -37,14 +37,14 @@ public class Course {
 					return false;
 				}
 			}
-			if (getEnrolled().size() < maxNumberOfStudents) {
-				student.addCourse(this);
-				// Update the student in the database
-				Database.updateStudent(student);
-				return true;
-			}
+			student.addCourse(this);
+			return true;
 		}
 		return false;
+	}
+
+	public int getLimit() {
+		return maxNumberOfStudents;
 	}
 
 	public Vector<Student> getEnrolled() {
@@ -57,7 +57,7 @@ public class Course {
 	}
 
 	public boolean removeStudent(Student student) {
-		return student.dropCourse(this) && Database.updateStudent(student);
+		return student.dropCourse(this);
 	}
 
 	public int getCredits() {
