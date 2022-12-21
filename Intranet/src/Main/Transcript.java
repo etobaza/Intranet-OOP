@@ -1,18 +1,26 @@
 package Main;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Transcript {
+public class Transcript implements Serializable {
 	private Journal journal;
 	private HashMap<Course, Double> transcript;
 
 	public Transcript(Student student, Journal journal) {
 		this.journal = journal;
 		this.transcript = new HashMap<>();
+		if (student.getCourses() == null) {
+			return;
+		}
 
 		for (Course course : student.getCourses()) {
+			Map<Date, Double> grades = journal.getGrades(course);
+			if (grades == null || grades.isEmpty()) {
+				continue;
+			}
 			transcript.put(course, gpaForCourse(course));
 		}
 	}
@@ -28,6 +36,9 @@ public class Transcript {
 
 	public double totalGpa() {
 		double total = 0;
+		if (transcript.isEmpty()) {
+			return 0;
+		}
 		for (double gpa : transcript.values()) {
 			total += gpa;
 		}

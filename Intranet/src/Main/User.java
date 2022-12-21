@@ -41,12 +41,18 @@ public class User implements Comparable<User>, Serializable {
 	}
 
 	public boolean login(String username, String password) {
-		if (username.equals(this.username)
-				&& Objects.hash(password) == hashPassword) {
+		if (username.equals(this.username) && Objects.hash(password) == hashPassword) {
 			loginStatus = true;
 			return true;
 		}
 		return false;
+	}
+
+	public void setLoginStatus(boolean choice) {
+		if (choice)
+			loginStatus = true;
+		else
+			loginStatus = false;
 	}
 
 	public boolean logout() {

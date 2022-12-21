@@ -15,6 +15,7 @@ public class Journal {
 		for (Course course : courses) {
 			gradeJournal.put(course, new TreeMap<>());
 		}
+
 	}
 
 	public void addGrade(Course course, double grade) {

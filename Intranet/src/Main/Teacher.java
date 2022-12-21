@@ -1,9 +1,10 @@
 package Main;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Vector;
 
-public class Teacher extends Employee implements Create {
+public class Teacher extends Employee implements Create, Serializable {
 	private String department;
 	private Vector<Course> courses;
 	private TeacherTitle teacherTitle;

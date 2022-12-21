@@ -1,9 +1,10 @@
 package Main;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class Lesson {
+public class Lesson implements Serializable{
 	private Course course;
 	private Day day;
 	private Format format;

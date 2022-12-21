@@ -1,12 +1,13 @@
 package Main;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Vector;
 import java.util.stream.Collectors;
 
-public class Course {
+public class Course implements Comparable, Serializable {
 	private String name;
 	private int credits;
 	private String description;
@@ -135,6 +136,15 @@ public class Course {
 				&& isElective == other.isElective && maxNumberOfStudents == other.maxNumberOfStudents
 				&& Objects.equals(name, other.name) && Objects.equals(prerequisite, other.prerequisite)
 				&& semester == other.semester;
+	}
+
+	public int compareTo(Object o) {
+		Course other = (Course) o;
+		if (this.name.equals(other.name)) {
+			return this.semester.compareTo(other.semester);
+		} else {
+			return this.name.compareTo(other.name);
+		}
 	}
 
 }

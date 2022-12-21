@@ -11,16 +11,12 @@ import java.util.Vector;
 
 public final class Database implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private final static String BASE_PATH = "somepath";
+	private final static String BASE_PATH = "C:\\Users\\rblxx\\git\\intranetTwo\\Intranet\\src";
 	private static Database instance = new Database(BASE_PATH);
 	private final String path;
 	private static Database obj;
 	public static Vector<User> users = new Vector<User>();
-	public static Vector<Student> students = new Vector<Student>();
-	public static Vector<Admin> admins = new Vector<Admin>();
-	public static Vector<DeskWorker> deskworkers = new Vector<DeskWorker>();
-	public static Vector<Manager> managers = new Vector<Manager>();
-	public static Vector<Teacher> teachers = new Vector<Teacher>();
+	public static Vector<Employee> employees = new Vector<Employee>();
 	public static Vector<Course> courses = new Vector<Course>();
 	public static Vector<Message> messages = new Vector<Message>();
 	public static Vector<Journal> journals = new Vector<Journal>();
@@ -28,21 +24,6 @@ public final class Database implements Serializable {
 	public static Vector<News> newss = new Vector<News>();
 	public static Vector<Organization> organizations = new Vector<Organization>();
 	public static Vector<Transcript> transcripts = new Vector<Transcript>();
-
-	public static boolean updateStudent(Student student) {
-		if (student == null) {
-			System.out.println("Error: cannot be null");
-			return false;
-		}
-		int index = students.indexOf(student);
-		if (index >= 0) {
-			students.set(index, student);
-			return true;
-		} else {
-			students.add(student);
-			return false;
-		}
-	}
 
 	public static boolean updateUser(User user) {
 		if (user == null) {
@@ -59,62 +40,17 @@ public final class Database implements Serializable {
 		}
 	}
 
-	public static boolean updateAdmin(Admin admin) {
-		if (admin == null) {
+	public static boolean updateEmployee(Employee employee) {
+		if (employee == null) {
 			System.out.println("Error: cannot be null");
 			return false;
 		}
-		int index = admins.indexOf(admin);
+		int index = users.indexOf(employee);
 		if (index >= 0) {
-			admins.set(index, admin);
+			users.set(index, employee);
 			return true;
 		} else {
-			admins.add(admin);
-			return false;
-		}
-	}
-
-	public static boolean updateDeskworker(DeskWorker deskworker) {
-		if (deskworker == null) {
-			System.out.println("Error: cannot be null");
-			return false;
-		}
-		int index = deskworkers.indexOf(deskworker);
-		if (index >= 0) {
-			deskworkers.set(index, deskworker);
-			return true;
-		} else {
-			deskworkers.add(deskworker);
-			return false;
-		}
-	}
-
-	public static boolean updateManager(Manager manager) {
-		if (manager == null) {
-			System.out.println("Error: cannot be null");
-			return false;
-		}
-		int index = managers.indexOf(manager);
-		if (index >= 0) {
-			managers.set(index, manager);
-			return true;
-		} else {
-			managers.add(manager);
-			return false;
-		}
-	}
-
-	public static boolean updateTeacher(Teacher teacher) {
-		if (teacher == null) {
-			System.out.println("Error: cannot be null");
-			return false;
-		}
-		int index = teachers.indexOf(teacher);
-		if (index >= 0) {
-			teachers.set(index, teacher);
-			return true;
-		} else {
-			teachers.add(teacher);
+			users.add(employee);
 			return false;
 		}
 	}
@@ -223,29 +159,13 @@ public final class Database implements Serializable {
 			return false;
 		}
 	}
-	
-	public static Vector<Admin> getAdmins() {
-		return admins;
-	}
 
 	public static Vector<User> getUsers() {
 		return users;
 	}
 
-	public static Vector<Student> getStudents() {
-		return students;
-	}
-
-	public static Vector<DeskWorker> getDeskworkers() {
-		return deskworkers;
-	}
-
-	public static Vector<Manager> getManagers() {
-		return managers;
-	}
-
-	public static Vector<Teacher> getTeachers() {
-		return teachers;
+	public static Vector<Employee> getEmployees() {
+		return employees;
 	}
 
 	public static Vector<Course> getCourses() {
@@ -276,6 +196,49 @@ public final class Database implements Serializable {
 		return transcripts;
 	}
 
+	/*
+	 * public static boolean updateStudent(Student student) { if (student == null) {
+	 * System.out.println("Error: cannot be null"); return false; } int index =
+	 * students.indexOf(student); if (index >= 0) { students.set(index, student);
+	 * return true; } else { students.add(student); return false; } }
+	 * 
+	 * 
+	 * 
+	 * public static boolean updateAdmin(Admin admin) { if (admin == null) {
+	 * System.out.println("Error: cannot be null"); return false; } int index =
+	 * admins.indexOf(admin); if (index >= 0) { admins.set(index, admin); return
+	 * true; } else { admins.add(admin); return false; } }
+	 * 
+	 * 
+	 * public static boolean updateDeskworker(DeskWorker deskworker) { if
+	 * (deskworker == null) { System.out.println("Error: cannot be null"); return
+	 * false; } int index = deskworkers.indexOf(deskworker); if (index >= 0) {
+	 * deskworkers.set(index, deskworker); return true; } else {
+	 * deskworkers.add(deskworker); return false; } }
+	 * 
+	 * public static boolean updateManager(Manager manager) { if (manager == null) {
+	 * System.out.println("Error: cannot be null"); return false; } int index =
+	 * managers.indexOf(manager); if (index >= 0) { managers.set(index, manager);
+	 * return true; } else { managers.add(manager); return false; } }
+	 * 
+	 * public static boolean updateTeacher(Teacher teacher) { if (teacher == null) {
+	 * System.out.println("Error: cannot be null"); return false; } int index =
+	 * teachers.indexOf(teacher); if (index >= 0) { teachers.set(index, teacher);
+	 * return true; } else { teachers.add(teacher); return false; } }
+	 * 
+	 * public static Vector<Admin> getAdmins() { return admins; }
+	 * 
+	 * 
+	 * 
+	 * public static Vector<Student> getStudents() { return students; }
+	 * 
+	 * public static Vector<DeskWorker> getDeskworkers() { return deskworkers; }
+	 * 
+	 * public static Vector<Manager> getManagers() { return managers; }
+	 * 
+	 * public static Vector<Teacher> getTeachers() { return teachers; }
+	 */
+
 	public static void serialize() throws IOException {
 		File file = new File("database.txt");
 		file.createNewFile();
@@ -287,9 +250,22 @@ public final class Database implements Serializable {
 		}
 
 		try {
-			FileOutputStream fs = new FileOutputStream("database.txt");
-			ObjectOutputStream oos = new ObjectOutputStream(fs);
+			FileOutputStream fos = new FileOutputStream("database.txt");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(obj);
+			oos.writeObject(users);
+			oos.writeObject(students);
+			oos.writeObject(admins);
+			oos.writeObject(deskworkers);
+			oos.writeObject(managers);
+			oos.writeObject(teachers);
+			oos.writeObject(courses);
+			oos.writeObject(messages);
+			oos.writeObject(journals);
+			oos.writeObject(marks);
+			oos.writeObject(newss);
+			oos.writeObject(organizations);
+			oos.writeObject(transcripts);
 			oos.flush();
 			oos.close();
 			System.out.println("Serialization complete");
@@ -299,12 +275,20 @@ public final class Database implements Serializable {
 	}
 
 	public static void deserialize() throws IOException, ClassNotFoundException {
+		File file = new File("database.txt");
+		if (!file.exists()) {
+			System.out.println("Error: file does not exist");
+			return;
+		}
+		if (!file.canRead()) {
+			file.setReadable(true);
+		}
 
-    	FileInputStream fs = new FileInputStream("database.txt");
-    	ObjectInputStream ois = new ObjectInputStream(fs);
-    	obj = (Database)ois.readObject();
-    	ois.close();
-    }
+		FileInputStream fis = new FileInputStream("database.txt");
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		instance = (Database) ois.readObject();
+		ois.close();
+	}
 
 	private Database(String path) {
 		this.path = path;

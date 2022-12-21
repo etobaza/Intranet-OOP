@@ -1,11 +1,12 @@
 package Main;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Vector;
 
-public class Student extends User implements ViewTranscript, Create, Advisor {
+public class Student extends User implements ViewTranscript, Create, Advisor, Serializable {
 	private double gpa;
 	private Faculty faculty;
 	private Date enrollmentDate;
@@ -30,6 +31,7 @@ public class Student extends User implements ViewTranscript, Create, Advisor {
 		this.year = year;
 		this.semester = semester;
 		this.academicDegree = academicDegree;
+		this.courses = new Vector<Course>();
 		this.journal = new Journal(courses);
 		this.transcript = new Transcript(this, journal);
 		this.attendances = new HashMap<>();

@@ -1,9 +1,10 @@
 package Main;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class Manager extends Employee implements ViewInfoStudents, ViewTranscript, ViewTeachers, Create {
+public class Manager extends Employee implements ViewInfoStudents, ViewTranscript, ViewTeachers, Create, Serializable {
 	private ManagerType type;
 	private ArrayList<News> news;
 	private Vector<Teacher> teachers;

@@ -1,8 +1,9 @@
 package Main;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class News {
+public class News implements Serializable{
 	private String title;
 	private String text;
 	private Date postDate;

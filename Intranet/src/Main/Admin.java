@@ -1,6 +1,8 @@
 package Main;
 
-public class Admin extends Employee implements Create {
+import java.io.Serializable;
+
+public class Admin extends Employee implements Create, Serializable{
 	public Admin(String firstName, String lastName, String id, String username, String password, Sex sex, int age,
 			String email, double salary) {
 		super(firstName, lastName, id, username, password, sex, age, email, salary);
