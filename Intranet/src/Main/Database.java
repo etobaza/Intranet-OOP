@@ -11,7 +11,7 @@ import java.util.Vector;
 
 public final class Database implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private final static String BASE_PATH = "C:\\Users\\lenovo\\eclipse-workspace\\unisystem\\Database\\";
+	private final static String BASE_PATH = "somepath";
 	private static Database instance = new Database(BASE_PATH);
 	private final String path;
 	private static Database obj;
