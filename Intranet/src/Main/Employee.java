@@ -17,25 +17,41 @@ public class Employee extends User implements Serializable {
 		super(firstName, lastName, id, username, password, sex, age, email);
 		this.salary = salary;
 	}
+	/**
+	*performs the function of sending messages to Employee class
+	*/
 
 	public void sendMessage(Employee employee, Message message) {
 		employee.messages.add(message);
 	}
+	/**
+	* Implements getter of message for Employee class
+	*/
 
 	public Vector<Message> getMessage() {
 		return messages;
 	}
+	/**
+	* Implements getter of salary for Employee class
+	*/
 
 	public double getSalary() {
 		return salary;
 	}
+	/**
+	* Implements setter of salary for Employee class
+	*/
+
 
 	public void setSalary(double salary) {
 		this.salary = salary;
 	}
-
+	
 	public void sendReport() {
 	}
+	/**
+	* hashCode() implementation by including  salary of the Employee class
+	*/
 
 	public int hashCode() {
 		final int prime = 31;
@@ -43,6 +59,9 @@ public class Employee extends User implements Serializable {
 		result = prime * result + Objects.hash(salary);
 		return result;
 	}
+	/**
+	*Implementing equals() for Employee class
+	*/
 
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -55,6 +74,9 @@ public class Employee extends User implements Serializable {
 		return Double.doubleToLongBits(salary) == Double.doubleToLongBits(other.salary);
 
 	}
+	/**
+	*Returns the primitive value that we gave to the class of Employee class
+	*/
 
 	public String toString() {
 		return super.toString() + ", salary= " + salary;
