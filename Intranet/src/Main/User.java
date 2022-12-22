@@ -1,7 +1,7 @@
 package Main;
 
 import java.io.Serializable;
-import java.util.Base64;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -195,6 +195,18 @@ public class User implements Comparable<User>, Serializable {
 
 	public boolean isLoginStatus() {
 		return loginStatus;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setSex(Sex sex) {
+		this.sex = sex;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
 	}
 
 	/**

@@ -3,6 +3,8 @@ package Main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.Vector;
@@ -14,6 +16,8 @@ public class UniversitySystem {
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		sessionUser = null;
 		Database.deserialize();
+		Database.users.add(new Admin("Gordon", "Freeman", "2X120SD", "superadmin", "easypass", Sex.UNDEFINED, 99,
+				"superadmin@gmail.com", 0));
 		System.out.println(Database.users);
 		runSystem();
 		System.out.print(Database.getUsers());
@@ -28,6 +32,8 @@ public class UniversitySystem {
 				displayStudentView();
 			} else if (sessionUser instanceof Teacher) {
 				displayTeacherView();
+			} else if (sessionUser instanceof Admin) {
+				displayAdminView();
 			} else {
 				System.out.println("Oops, fiddlesticks! What now?");
 			}
@@ -53,6 +59,8 @@ public class UniversitySystem {
 						sessionUser = (Student) user;
 					} else if (user instanceof Teacher) {
 						sessionUser = (Teacher) user;
+					} else if (user instanceof Admin) {
+						sessionUser = (Admin) user;
 					} else {
 						sessionUser = user;
 					}
@@ -264,14 +272,12 @@ public class UniversitySystem {
 					break;
 
 				case "5":
-					// Get list of courses that the teacher teaches
 					courses = ((Teacher) sessionUser).getCourses();
 					if (courses.isEmpty()) {
 						System.out.println("You do not currently teach any courses.");
 						break;
 					}
 
-					// Print out list of courses and allow teacher to choose one
 					System.out.println("Choose a course to view student marks:");
 					for (i = 0; i < courses.size(); i++) {
 						System.out.println((i + 1) + ". " + courses.get(i).getName());
@@ -348,5 +354,105 @@ public class UniversitySystem {
 
 			}
 		}
+	}
+
+	private static void displayAdminView() throws IOException {
+		System.out.println("Welcome, " + sessionUser.getFirstName() + "!");
+		while (true) {
+			System.out.println("1. View logs");
+			System.out.println("2. Create user");
+			System.out.println("3. Update user");
+			System.out.println("4. Remove user");
+			System.out.println("5. Send message");
+			System.out.println("6. Logout");
+			System.out.print("Enter your choice: ");
+			String choice = reader.readLine();
+			switch (choice) {
+			case "1":
+				((Admin) sessionUser).viewLogs();
+				break;
+			case "2":
+				System.out.println("Which type of user do you want to create?");
+				System.out.println("1. User");
+				System.out.println("2. Student");
+				System.out.println("3. Teacher");
+				System.out.print("Enter choice: ");
+				String userType = reader.readLine();
+				System.out.print("Enter first name: ");
+				String firstName = reader.readLine();
+				System.out.print("Enter last name: ");
+				String lastName = reader.readLine();
+				System.out.print("Enter ID: ");
+				String id = reader.readLine();
+				System.out.print("Enter username: ");
+				String username = reader.readLine();
+				System.out.print("Enter password: ");
+				String password = reader.readLine();
+				System.out.print("Enter sex (M/F): ");
+				String sexString = reader.readLine();
+				System.out.print("Enter email: ");
+				String email = reader.readLine();
+				Sex sex;
+				if (sexString.equalsIgnoreCase("M")) {
+					sex = Sex.MALE;
+				} else if (sexString.equalsIgnoreCase("F")) {
+					sex = Sex.FEMALE;
+				} else {
+					System.out.println("Invalid sex. Try again.");
+					break;
+				}
+				System.out.print("Enter age: ");
+				int age = Integer.parseInt(reader.readLine());
+				if (userType.equals("1")) {
+					User newUser = new User(firstName, lastName, id, username, password, sex, age, email);
+					Database.users.add(newUser);
+					System.out.println("User created successfully!");
+				} else if (userType.equals("2")) {
+					System.out.print("Enter enrollment date (dd-MM-yyyy): ");
+					String enrollmentDateString = reader.readLine();
+					try {
+						Date enrollmentDate = new SimpleDateFormat("dd-MM-yyyy").parse(enrollmentDateString);
+					} catch (ParseException e) {
+						System.out.println("Invalid date format. Try again.");
+						break;
+					}
+					Student newStudent = new Student(firstName, lastName, id, username, password, sex, age, email, 0,
+							null, new Date(), false, 2022, null, null);
+					Database.users.add(newStudent);
+					System.out.println("Student created successfully!");
+				} else if (userType.equals("3")) {
+					System.out.print("Enter hire date (dd-MM-yyyy): ");
+					String hireDateString = reader.readLine();
+					try {
+						Date hireDate = new SimpleDateFormat("dd-MM-yyyy").parse(hireDateString);
+					} catch (ParseException e) {
+						System.out.println("Invalid date format. Try again.");
+						break;
+					}
+					Teacher newTeacher = new Teacher(firstName, lastName, id, username, password, sex, age, email, 0,
+							null, null, null, null, null);
+					Database.users.add(newTeacher);
+				} else {
+					System.out.println("Invalid user type. Try again.");
+					break;
+				}
+				break;
+			case "3":
+				break;
+			case "4":
+				break;
+			case "5":
+				break;
+			case "6":
+				sessionUser.logout();
+				sessionUser = null;
+				displayCredentialsMenu();
+				break;
+			default:
+				System.out.println("Invalid choice. Try again.");
+				break;
+			}
+		}
+
 	}
 }

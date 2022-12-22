@@ -9,6 +9,7 @@ public class ReseacherDec implements Researcher {
 	public void ResearchDecorator() {
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public boolean doReserch(Student student, Teacher teacher) {
 		if (((Map<Teacher, Enum>) teacher).containsValue(TeacherTitle.PROFESSOR)
 				&& ((Map<Student, Enum>) student).containsValue(AcademicDegree.PHD)) {
