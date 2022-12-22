@@ -1,4 +1,4 @@
-#OOP 2022 Final Project: University Intranet System
+# OOP 2022 Final Project: University Intranet System#
 Welcome to the University Intranet System repository!
 
 This repository contains the code for a console application that provides a range of functionality for students and staff at a university, including course registration, grades and transcripts, class schedules, news and many more.
